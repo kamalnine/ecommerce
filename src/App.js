@@ -1,6 +1,7 @@
-import { ToastContainer } from 'react-toastify';
+
 import './App.css';
 import LoginForm from './Component/LoginForm';
+import React,{useState} from 'react';
 import SignupForm from './Component/SignupForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,24 +20,25 @@ import PriceLess69999 from './Component/PriceLess69999';
 import PriceLess89999 from './Component/PriceLess89999';
 
 function App() {
+  const [cart,setCart] = useState([]);
   return <BrowserRouter>
-    <ToastContainer />
+
     <Routes>
       <Route index element={<SignupForm />} />
       <Route path='/login' element={<LoginForm />} />
-      <Route path='/' element={<MainHeader />}>
-        <Route path='/home' element={<Product />} />
-        <Route path='/productDetails' element={<ProductDetails />} />
-        <Route path='/search' element={<SearchProduct />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/mobile' element={<MobileProduct/>}/>
-        <Route path='/laptop' element={<LaptopProduct/>}/>
-        <Route path='/tablet' element={<TabletProduct/>}/>
-        <Route path='/clothes' element={<ClothesProduct/>}/>
-        <Route path='/less' element={<PriceLess29999/>}/>
-        <Route path='/lesss' element={<PriceLess49999/>}/>
-        <Route path='/lessss' element={<PriceLess69999/>}/>
-        <Route path='/lesssss' element={<PriceLess89999/>}/>
+      <Route path='/' element={<MainHeader cart={cart}/>}>
+        <Route path='/home' element={<Product cart={cart} setCart={setCart} />} />
+        <Route path='/productDetails' element={<ProductDetails cart={cart} setCart={setCart}/>} />
+        <Route path='/search/:term' element={<SearchProduct cart={cart} setCart={setCart}/>} />
+        <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
+        <Route path='/mobile' element={<MobileProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/laptop' element={<LaptopProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/tablet' element={<TabletProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/clothes' element={<ClothesProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/less' element={<PriceLess29999 cart={cart} setCart={setCart}/>}/>
+        <Route path='/lesss' element={<PriceLess49999 cart={cart} setCart={setCart}/>}/>
+        <Route path='/lessss' element={<PriceLess69999 cart={cart} setCart={setCart}/>}/>
+        <Route path='/lesssss' element={<PriceLess89999 cart={cart} setCart={setCart}/>}/>
 
 
       </Route>

@@ -1,3 +1,4 @@
+import { IoIosArrowBack } from "react-icons/io";
 import React,{useState,useEffect} from 'react'
 import {
     MDBCard,
@@ -7,8 +8,10 @@ import {
     MDBCardHeader,
     MDBCardFooter,
   } from 'mdb-react-ui-kit';
+  import {useNavigate} from 'react-router'
 function LaptopProduct() {
     const [product, setProduct] = useState([]);
+    const navigate = useNavigate();
 
   useEffect(()=>{
     fetchProductByCategory()
@@ -37,13 +40,14 @@ function LaptopProduct() {
   }
   return (
     <div className='container my-5'>
+      <IoIosArrowBack onClick={()=>navigate('/home')} style={{fontSize:"20px",position:"absolute",top:"8vh",left:"0.1vw"}}/>
             <div className="row" style={{ padding: "10px",position:"absolute",left:"2vw" }}>
                 {product.map((prod) => (
                     <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>
                         <MDBCard style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '65%' }}>
                             <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} >
                                
-                                <img src={prod.imageURL} className="card-img-top" alt="..." style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} />
+                                <img src={prod.imageURL} className="card-img-top" alt="..."onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} />
                                 
                             </MDBCardHeader>
                             <MDBCardBody style={{ padding: "1rem",maxHeight:"150px" }}>

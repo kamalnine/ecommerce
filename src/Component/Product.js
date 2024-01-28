@@ -8,12 +8,31 @@ import {
     MDBCardFooter,
 } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router';
+import {ToastContainer,toast } from 'react-toastify';
 
 
 
- const Product = () => {
+
+ const Product = ({cart,setCart}) => {
     const [product, setProduct] = useState([]);
-    const [showCards, setShowCards] = useState(false);
+    const addToCart = (productID, name, description, price, imageURL) => {
+        const obj = {
+            productID, name, description, price, imageURL
+        }
+        setCart([...cart, obj]);
+        console.log(cart);
+        toast.success('🦄 Item Added To Cart!', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+           
+            });
+    }
     const navigate = useNavigate()
 
    
@@ -36,10 +55,10 @@ import { useNavigate } from 'react-router';
             if (data.status !== 401) {
                 setProduct(data);
                
-                setShowCards(true);
+                
                 
             } else {
-                setShowCards(false);
+                
                
             }
 
@@ -50,8 +69,22 @@ import { useNavigate } from 'react-router';
 
     return (
         <div className='container my-5'>
+  <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+
+/>
             <div className="row" style={{ padding: "10px" }}>
-                {product.map((prod) => (
+                {product
+                .map((prod) => (
                     <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>
                         <MDBCard style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '100%' }}>
                             <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)}>
@@ -68,7 +101,7 @@ import { useNavigate } from 'react-router';
                             </MDBCardBody>
                             <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
                                     <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
-                                    <button className='btn btn-warning' style={{float:"right"}}>Add to cart</button>
+                                    {/* <button onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)} className='btn btn-warning' style={{float:"right"}}>Add to cart</button> */}
                                 </MDBCardFooter>
                         </MDBCard>
                     </div>

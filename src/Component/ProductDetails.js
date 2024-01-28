@@ -7,10 +7,13 @@ import {
   MDBCardHeader,
   MDBCardFooter,
 } from 'mdb-react-ui-kit';
+import {ToastContainer,toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
+import { IoIosArrowBack } from "react-icons/io";
 
 
 
-function ProductDetails() {
+function ProductDetails({cart,setCart}) {
     const [id,setid]=useState();
     const[jsonData,setJsonData]=useState({});
     const[name,setName] = useState("");
@@ -19,6 +22,25 @@ function ProductDetails() {
     const[price,setPrice] = useState("");
     const[category,setCategory] = useState("");
     const[relatedProduct,setRelatedProduct] = useState([]);
+    const navigate = useNavigate();
+    const addToCart = (productID, name, description, price, imageURL) => {
+      const obj = {
+          productID, name, description, price, imageURL
+      }
+      setCart([...cart, obj]);
+      console.log(cart);
+      toast.success('🦄 Item Added To Cart!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+         
+          });
+  }
     useEffect(() => {
       const fetchData = async () => {
           try {
@@ -74,6 +96,20 @@ function ProductDetails() {
 
   return (
     <>
+<IoIosArrowBack onClick={()=>navigate('/home')} style={{position:"absolute",top:"10vh",left:"6vw",fontSize:"50px"}}/>
+     <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+
+/>
     <div className="container con">
       <div className='img'>
       <img src={imageURL} alt=""/>
@@ -83,7 +119,7 @@ function ProductDetails() {
         <h1 className='card-title'>{name}</h1>
         <p className="card-text">{description}</p>
         <button className='btn btn-primary mx-3'>{price} &#8377;</button>
-        <button className="btn btn-warning">Add To Cart</button>
+        <button className="btn btn-warning" onClick={()=>addToCart(id,name,description,price,imageURL)}>Add To Cart</button>
       </div>
     </div>
     <div className="related-products my-5" >
@@ -96,7 +132,7 @@ function ProductDetails() {
                         <MDBCard style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '65%' }}>
                             <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} >
                                
-                                <img src={prod.imageURL} className="card-img-top" alt="..." style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} />
+                                <img src={prod.imageURL} className="card-img-top" alt="..."  style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)}/>
                                 
                             </MDBCardHeader>
                             <MDBCardBody style={{ padding: "1rem",maxHeight:"150px" }}>
@@ -108,7 +144,7 @@ function ProductDetails() {
                             </MDBCardBody>
                             <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
                                     <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
-                                    <button className='btn btn-warning' style={{float:"right"}}>Add to cart</button>
+                                    <button className='btn btn-warning' onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)} style={{float:"right"}}>Add to cart</button>
                                 </MDBCardFooter>
                         </MDBCard>
                     </div>

@@ -2,7 +2,8 @@ import React,{useState} from 'react'
 import LoginIcon from '@material-ui/icons/AccountCircle';
 import { Button } from '@material-ui/core';
 import { useNavigate } from 'react-router';
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
+
 import './SignupForm.css'
 import emailjs from '@emailjs/browser';
 import GoogleOauthTest from './GoogleOAuth';
@@ -51,7 +52,17 @@ function SignupForm() {
           console.log(result.status);
           if(result.status !== 400 && result!=="Email is already registered. Please login.")
           {
-            toast.success("Signup Successfull");
+            toast.success('🦄 Signup Sucessfull', {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark"
+              
+              });
             const serviceId = "service_lr9mb09";
             const templateId = "template_hjtky3k";
             const publicKey ="KqXYWVyrbahI8eQ88";
@@ -208,7 +219,19 @@ function SignupForm() {
     
   return (
     <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden' style={{ minHeight: '100vh' }}>
-      
+       <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+
+/>
       <MDBRow>
         <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
           <h3 className="my-5 display-3 fw-bold ls-tight px-3" style={{ color: 'hsl(218, 81%, 95%)' }}>
