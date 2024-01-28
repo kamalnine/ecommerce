@@ -9,9 +9,28 @@ import {
   } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router';
 import { IoIosArrowBack } from "react-icons/io";
-function TabletProduct() {
+import {ToastContainer,toast} from 'react-toastify';
+function TabletProduct({cart,setCart}) {
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
+    const addToCart = (productID, name, description, price, imageURL) => {
+      const obj = {
+          productID, name, description, price, imageURL
+      }
+      setCart([...cart, obj]);
+      console.log(cart);
+      toast.success('🦄 Item Added To Cart!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+         
+          });
+  }
 
   useEffect(()=>{
     fetchProductByCategory()
@@ -40,6 +59,19 @@ function TabletProduct() {
   }
   return (
    <>
+    <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+
+/>
     <IoIosArrowBack onClick={()=>navigate('/home')} style={{fontSize:"20px",position:"absolute",top:"8vh",left:"0.1vw"}}/>
     <div className='container my-5'>
      
@@ -61,7 +93,7 @@ function TabletProduct() {
                             </MDBCardBody>
                             <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
                                     <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
-                                    <button className='btn btn-warning' style={{float:"right"}}>Add to cart</button>
+                                    <button className='btn btn-warning' style={{float:"right"}} onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button>
                                 </MDBCardFooter>
                         </MDBCard>
                     </div>

@@ -8,12 +8,31 @@ import {
   MDBCardHeader,
   MDBCardFooter,
 } from 'mdb-react-ui-kit';
+import {ToastContainer,toast} from 'react-toastify'
 
-const SearchProduct = () => {
+const SearchProduct = ({cart,setCart}) => {
 console.log(useParams());
 const {term} = useParams();
 const[searchProduct,setSearchProduct] = useState([]);
 const navigate = useNavigate();
+const addToCart = (productID, name, description, price, imageURL) => {
+  const obj = {
+      productID, name, description, price, imageURL
+  }
+  setCart([...cart, obj]);
+  console.log(cart);
+  toast.success('🦄 Item Added To Cart!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+     
+      });
+}
 
 useEffect(()=>{
   fetchProductBySearch();
@@ -40,6 +59,19 @@ function fetchProductBySearch() {
 }
   return (
     <div className='container my-5'>
+ <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+
+/>
     <div className="row" style={{ padding: "10px" }}>
         {searchProduct
         .map((prod) => (
@@ -59,7 +91,7 @@ function fetchProductBySearch() {
                     </MDBCardBody>
                     <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
                             <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
-                            <button className='btn btn-warning' style={{float:"right"}}>Add to cart</button>
+                            <button className='btn btn-warning' style={{float:"right"}} onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button>
                         </MDBCardFooter>
                 </MDBCard>
             </div>

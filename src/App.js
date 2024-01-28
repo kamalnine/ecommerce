@@ -18,6 +18,7 @@ import PriceLess29999 from './Component/PriceLess29999';
 import PriceLess49999 from './Component/PriceLess49999';
 import PriceLess69999 from './Component/PriceLess69999';
 import PriceLess89999 from './Component/PriceLess89999';
+import Checkout from './Component/Checkout';
 
 function App() {
   const [cart,setCart] = useState([]);
@@ -39,6 +40,7 @@ function App() {
         <Route path='/lesss' element={<PriceLess49999 cart={cart} setCart={setCart}/>}/>
         <Route path='/lessss' element={<PriceLess69999 cart={cart} setCart={setCart}/>}/>
         <Route path='/lesssss' element={<PriceLess89999 cart={cart} setCart={setCart}/>}/>
+        <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
 
 
       </Route>
