@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaCartShopping } from "react-icons/fa6";
@@ -10,6 +10,7 @@ function Header({ cart }) {
     const location = useLocation();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const sol = localStorage.getItem("resultGoogle");
+    const name = localStorage.getItem("name");
    
     useEffect(() => {
         const logged = localStorage.getItem("log");
@@ -17,7 +18,7 @@ function Header({ cart }) {
         setIsLoggedIn(logged === "true") // Convert the string to boolean
     }, []);
     
-  localStorage.setItem("add",isLoggedIn);
+    localStorage.setItem("add", isLoggedIn);
 
     const toggleFilterVisibility = () => {
         setIsFilterVisible(!isFilterVisible);
@@ -28,13 +29,12 @@ function Header({ cart }) {
         navigate(`/search/${searchTerm}`)
         setSearchTerm("");
     }
+
     const handleLogout = () => {
         localStorage.clear();
         setIsLoggedIn(false);
-     }
-
-  
-
+        window.location.reload()
+    }
 
     return (
         <>
@@ -44,43 +44,44 @@ function Header({ cart }) {
                     <form className='search-bar' onSubmit={handleSubmit}>
                         <input type="text" placeholder='Search Products' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                     </form>
-                    {isLoggedIn || sol==='Authorized' ?  <Link to={'/cart'} className='cart'>
-                        <button type="button" className="btn btn-primary position-relative">
-                            <FaCartShopping />
-                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                {cart.length}
-                                <span className="visually-hidden">unread messages</span>
-                            </span>
-                        </button>
-                    </Link> : ""}
+                    {isLoggedIn || sol==='Authorized' ? 
+                        <div className="user-info">
+                            <span style={{position:"absolute",left:"75vw",fontSize:"20px",top:"15px",fontWeight:"bolder"}}>Welcome {name}</span>
+                            <Link to={'/cart'} className='cart'>
+                                <button type="button" className="btn btn-primary position-relative">
+                                    <FaCartShopping />
+                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {cart.length}
+                                        <span className="visually-hidden">unread messages</span>
+                                    </span>
+                                </button>
+                            </Link>
+                        </div>
+                        : ""}
                    
                     {isLoggedIn || sol==='Authorized' ? (
                        <button type="button" onClick={handleLogout} className="btn btn-warning position-relative">
-                       Logout </button>
+                            Logout
+                       </button>
                     ) :
                     <>
-                    <Link to={'/login'} className="login">
-                        <button type="button" className="btn btn-warning position-relative" style={{position:"absolute",right:"-20px"}}>
-                            Login </button>
-                    </Link>
-                    <Link to={'/signup'} className="signup">
-                        <button type="button" className="btn btn-warning position-relative"style={{position:"absolute",right:"10px"}}>
-                            Signup </button>
-                    </Link>
-                </>
-                        
-                            
-                       
-
-
+                        <Link to={'/login'} className="login">
+                            <button type="button" className="btn btn-warning position-relative" style={{position:"absolute",right:"-20px"}}>
+                                Login
+                            </button>
+                        </Link>
+                        <Link to={'/signup'} className="signup">
+                            <button type="button" className="btn btn-warning position-relative"style={{position:"absolute",right:"10px"}}>
+                                Signup
+                            </button>
+                        </Link>
+                    </>
                     }
-
-
                 </div>
                 {
                     location.pathname === '/' && (
                         <div className='nav-bar-wrapper'>
-                            <NavLink className='items' onClick={toggleFilterVisibility}>Filter By {"=>"}</NavLink>
+                            <NavLink className='items' onClick={toggleFilterVisibility}>Category {"=>"}</NavLink>
                             {isFilterVisible && (
                                 <>
                                     <NavLink to='/' className='items'>No Filter</NavLink>
@@ -94,15 +95,12 @@ function Header({ cart }) {
                                     <NavLink to='/lesssss' className='items'>{"<="}89999</NavLink>
                                 </>
                             )}
-
-
                         </div>
                     )
                 }
-
             </header>
         </>
     )
 }
 
-export default Header
+export default Header;

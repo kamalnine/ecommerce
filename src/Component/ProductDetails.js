@@ -132,8 +132,8 @@ theme="dark"
 
 />
     <div className="container con">
-      <div className='img'>
-      <img src={imageURL} alt=""/>
+      <div className='img' >
+      <img src={imageURL} alt="" style={{width:"25vw"}}/>
       </div>
 
       <div className="text-center">

@@ -19,7 +19,7 @@ import PriceLess49999 from './Component/PriceLess49999';
 import PriceLess69999 from './Component/PriceLess69999';
 import PriceLess89999 from './Component/PriceLess89999';
 import Checkout from './Component/Checkout';
-
+import AdminProductAdd from './Component/AdminProductAdd';
 function App() {
   const [cart,setCart] = useState([]);
  
@@ -42,6 +42,7 @@ function App() {
         <Route path='/lessss' element={<PriceLess69999 cart={cart} setCart={setCart}/>}/>
         <Route path='/lesssss' element={<PriceLess89999 cart={cart} setCart={setCart}/>}/>
         <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
+        <Route path='/addproduct' element={<AdminProductAdd/>}/>
 
 
       </Route>

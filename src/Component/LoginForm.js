@@ -80,6 +80,7 @@ function LoginForm() {
           setisLoggedIn(true);
           navigate('/');
           setLoggedIn(true);
+          toast.success("Login Sucessfull");
           
          
           Notify1();
@@ -88,6 +89,7 @@ function LoginForm() {
           setisLoggedIn(false);
           setLoggedIn(false);
           Notify();
+        
         }
       } catch (error) {
         console.log(error);
@@ -143,6 +145,19 @@ function LoginForm() {
     };
   return (
     <MDBContainer fluid style={{ backgroundColor: '#508bfc', minHeight: '100vh' }}>
+      <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+
+/>
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
         <MDBCol sm='12' md='6' lg='4'>
           <MDBCard className='bg-white my-5' style={{ borderRadius: '1rem', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
