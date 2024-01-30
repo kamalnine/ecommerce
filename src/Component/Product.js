@@ -8,31 +8,33 @@ import {
     MDBCardFooter,
 } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router';
-import {ToastContainer,toast } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
+import Slide from './Slide';
+import Slide1 from './Slide1';
 
 
 
 
  const Product = ({cart,setCart}) => {
     const [product, setProduct] = useState([]);
-    const addToCart = (productID, name, description, price, imageURL) => {
-        const obj = {
-            productID, name, description, price, imageURL
-        }
-        setCart([...cart, obj]);
-        console.log(cart);
-        toast.success('🦄 Item Added To Cart!', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
+    // const addToCart = (productID, name, description, price, imageURL) => {
+    //     const obj = {
+    //         productID, name, description, price, imageURL
+    //     }
+    //     setCart([...cart, obj]);
+    //     console.log(cart);
+    //     toast.success('🦄 Item Added To Cart!', {
+    //         position: "top-right",
+    //         autoClose: 2000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "dark",
            
-            });
-    }
+    //         });
+    // }
     const navigate = useNavigate()
 
    
@@ -68,7 +70,21 @@ import {ToastContainer,toast } from 'react-toastify';
     };
 
     return (
+        <>
+        <div className='contain1'>
+        <Slide1 style={{width:'100%'}}/>
+        </div>
+  
+        <div className='contain mx-3 my-5'>
+       
+        <Slide style={{ width: '100%' }}/>
+        </div>
+        
+        
+         
+       
         <div className='container my-5'>
+          
   <ToastContainer
 position="top-right"
 autoClose={2000}
@@ -108,6 +124,7 @@ theme="dark"
                 ))}
             </div>
         </div>
+        </>
     )
 }
 

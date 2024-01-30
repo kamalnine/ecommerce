@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
@@ -9,6 +9,9 @@ import  emailjs  from '@emailjs/browser';
 
 const GoogleOauthTest = () => {
     const navigate = useNavigate();
+    const[logged,setLogged] = useState(false);
+
+  
 
     // Separate function for registering the user
     const registerUser = async (user) => {
@@ -51,7 +54,7 @@ const GoogleOauthTest = () => {
           
           const notification = "New Signup Detected";
           localStorage.setItem("notification",notification);
-          navigate('/home');
+          navigate('/');
 
         } 
         else {
@@ -84,18 +87,22 @@ const GoogleOauthTest = () => {
             if (response.data === "Authorized") {
               console.log(response.data);
                 localStorage.setItem('resultGoogle', response.data);
-                navigate('/home');
+                setLogged(true);
+                navigate('/');
+
             }  if (response.data === "Not Authorized") {
                 await registerUser(user);
+                setLogged(false);
             }
-           
+           localStorage.setItem("log1",logged);
             const response1 = await axios.post(`https://localhost:7131/api/Login/GetName?email=${email}&password=${encodedpassword}`);
             console.log(response1.data.token);
             localStorage.setItem("Token",response1.data.token);
             localStorage.setItem("role1",response1.data.role);
-            window.location.reload();
+          
     };
 
+  
     const handleFailure = (error) => {
         console.error('Authentication failed:', error);
     };

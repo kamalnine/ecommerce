@@ -44,7 +44,7 @@ const Cart = ({ cart, setCart }) => {
           cartItems.length === 0 ? (
             <div className='text-center'>
               <h1>Your Cart Is Empty</h1>
-              <Link to={"/home"} className='btn btn-warning'>Continue shopping...</Link>
+              <Link to={"/"} className='btn btn-warning'>Continue shopping...</Link>
             </div>
           ) :
             cartItems.map((prod) => (

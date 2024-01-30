@@ -14,7 +14,15 @@ import { ToastContainer,toast } from 'react-toastify';
 function MobileProduct({cart,setCart}) {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+   
+  useEffect(() => {
+      const logged = localStorage.getItem("log");
+      const logged1 = localStorage.getItem("log1");
+      setIsLoggedIn(logged === "true"); // Convert the string to boolean
+  }, []);
   const addToCart = (productID, name, description, price, imageURL) => {
+    if (isLoggedIn) {
     const obj = {
         productID, name, description, price, imageURL
     }
@@ -31,6 +39,19 @@ function MobileProduct({cart,setCart}) {
         theme: "dark",
        
         });
+      }
+      else{
+        toast.error('Please login first to add items to cart', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }    
 }
 
   useEffect(()=>{
@@ -72,7 +93,7 @@ pauseOnHover
 theme="dark"
 
 />
-      <IoIosArrowBack onClick={()=>navigate('/home')} style={{fontSize:"20px",position:"absolute",top:"8vh",left:"0.1vw"}}/>
+      <IoIosArrowBack onClick={()=>navigate('/')} style={{fontSize:"20px",position:"absolute",top:"8vh",left:"0.1vw"}}/>
             <div className="row" style={{ padding: "10px",position:"absolute",left:"2vw" }}>
                 {product.map((prod) => (
                     <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>

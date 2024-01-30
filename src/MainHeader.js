@@ -1,12 +1,12 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './Component/Header'
 
-function MainHeader({cart}) {
+function MainHeader({cart,isLoggedIn}) {
   
     return (
         <div>
-          <Header cart={cart}/>
+          <Header cart={cart} />
           <Outlet />
         </div>
       )

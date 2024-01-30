@@ -22,6 +22,9 @@ function LoginForm() {
     const [errorMsg, seterrorMsg] = useState('');
     const [errorMsg1, seterrorMsg1] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const[loggedIn,setLoggedIn] = useState(false);
+
+
   
     const toggleShowPassword = () => {
       setShowPassword(!showPassword);
@@ -33,6 +36,9 @@ function LoginForm() {
       localStorage.setItem('email', email);
       localStorage.setItem('password', password);
       console.warn({ email, password });
+
+     
+      
   
       try {
         let item = { email, password };
@@ -48,9 +54,11 @@ function LoginForm() {
         localStorage.setItem('result',result);
         localStorage.setItem('par', result.token);
         localStorage.setItem("role",result.role);
+        localStorage.setItem("Title",result.title)
         console.log(result);
-       
+       console.log(result.title);
         console.log(result.role);
+        console.log(isLoggedIn);
        
         let item2 = { email, password };
         let result1 = await fetch(`https://localhost:7131/api/Login/GetName?email=${email}&password=${encodedpassword}`, {
@@ -70,18 +78,22 @@ function LoginForm() {
         if (result.title !== 'Unauthorized' && result.status!==400) {
           localStorage.setItem('r',"Authorized");
           setisLoggedIn(true);
-          navigate('/home');
-          window.location.reload();
+          navigate('/');
+          setLoggedIn(true);
+          
          
           Notify1();
         } else {
           console.log('User not found');
           setisLoggedIn(false);
+          setLoggedIn(false);
           Notify();
         }
       } catch (error) {
         console.log(error);
       }
+      console.log(loggedIn);
+      localStorage.setItem("log",isLoggedIn);
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         setisLoggedIn(false);

@@ -15,15 +15,23 @@ import { IoIosArrowBack } from "react-icons/io";
 
 function ProductDetails({cart,setCart}) {
     const [id,setid]=useState();
-    const[jsonData,setJsonData]=useState({});
+    // const[setJsonData]=useState({});
     const[name,setName] = useState("");
     const[description,setDescription] = useState("");
     const[imageURL,setImageURL] = useState("");
     const[price,setPrice] = useState("");
-    const[category,setCategory] = useState("");
+    // const[setCategory] = useState("");
     const[relatedProduct,setRelatedProduct] = useState([]);
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+   
+    useEffect(() => {
+        const logged = localStorage.getItem("log");
+        const logged1 = localStorage.getItem("log1");
+        setIsLoggedIn(logged === "true"); // Convert the string to boolean
+    }, []);
     const addToCart = (productID, name, description, price, imageURL) => {
+      if (isLoggedIn) {
       const obj = {
           productID, name, description, price, imageURL
       }
@@ -40,21 +48,34 @@ function ProductDetails({cart,setCart}) {
           theme: "dark",
          
           });
+        }
+        else{
+          toast.error('Please login first to add items to cart', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }    
   }
     useEffect(() => {
       const fetchData = async () => {
           try {
               const params = new URLSearchParams(window.location.search).get("data1");
               const parsedData = JSON.parse(params);
-              setJsonData(parsedData);
+              // setJsonData(parsedData);
               setid(parsedData.productID);
               setName(parsedData.name);
               setDescription(parsedData.description);
               setImageURL(parsedData.imageURL);
               setPrice(parsedData.price);
-              setCategory(parsedData.category);
+              // setCategory(parsedData.category);
   
-      console.log(category);
+    
             
           } catch (error) {
               console.error('Error parsing JSON:', error);
@@ -96,7 +117,7 @@ function ProductDetails({cart,setCart}) {
 
   return (
     <>
-<IoIosArrowBack onClick={()=>navigate('/home')} style={{position:"absolute",top:"10vh",left:"6vw",fontSize:"50px"}}/>
+<IoIosArrowBack onClick={()=>navigate('/')} style={{position:"absolute",top:"10vh",left:"6vw",fontSize:"50px"}}/>
      <ToastContainer
 position="top-right"
 autoClose={2000}

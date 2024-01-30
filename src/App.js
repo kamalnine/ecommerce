@@ -1,7 +1,7 @@
 
 import './App.css';
 import LoginForm from './Component/LoginForm';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import SignupForm from './Component/SignupForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,14 +22,15 @@ import Checkout from './Component/Checkout';
 
 function App() {
   const [cart,setCart] = useState([]);
+ 
   return <BrowserRouter>
 
     <Routes>
-      <Route index element={<SignupForm />} />
+      <Route path='/signup' element={<SignupForm />} />
       <Route path='/login' element={<LoginForm />} />
-      <Route path='/' element={<MainHeader cart={cart}/>}>
-        <Route path='/home' element={<Product cart={cart} setCart={setCart} />} />
-        <Route path='/productDetails' element={<ProductDetails cart={cart} setCart={setCart}/>} />
+      <Route path='/' element={<MainHeader cart={cart} />}>
+        <Route index element={<Product cart={cart} setCart={setCart} />} />
+        <Route path='/productDetails' element={<ProductDetails cart={cart} setCart={setCart} />} />
         <Route path='/search/:term' element={<SearchProduct cart={cart} setCart={setCart}/>} />
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
         <Route path='/mobile' element={<MobileProduct cart={cart} setCart={setCart}/>}/>

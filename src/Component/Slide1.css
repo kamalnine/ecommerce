@@ -1,0 +1,22 @@
+/* Slide1.css */
+
+.center-container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100vw;
+    height: 80vh;
+     /* Adjust the height as needed */
+  }
+  
+  .image-slider1 {
+    width: 80%; /* Adjust the width as needed */
+  }
+  
+  .image-slider1 img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Add border radius for rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
