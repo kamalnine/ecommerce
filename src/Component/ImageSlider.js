@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
  
 const ImageSlider = ({ images }) => {
-    console.log('Images prop:', images);
+    
  
     const settings = {
       dots: true,

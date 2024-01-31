@@ -14,7 +14,7 @@ function Header({ cart }) {
    
     useEffect(() => {
         const logged = localStorage.getItem("log");
-        const logged1 = localStorage.getItem("log1");
+       
         setIsLoggedIn(logged === "true") // Convert the string to boolean
     }, []);
     
@@ -33,6 +33,7 @@ function Header({ cart }) {
     const handleLogout = () => {
         localStorage.clear();
         setIsLoggedIn(false);
+        navigate("/");
         window.location.reload()
     }
 

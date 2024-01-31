@@ -10,7 +10,7 @@ import {
 import { useNavigate } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 import Slide from './Slide';
-import Slide1 from './Slide1';
+
 
 const Product = ({ cart, setCart }) => {
     const [product, setProduct] = useState([]);

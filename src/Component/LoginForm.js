@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useNavigate } from 'react-router';
 import LoginIcon from '@material-ui/icons/AccountCircle';
 import { Button } from '@material-ui/core';
@@ -29,7 +29,9 @@ function LoginForm() {
     const toggleShowPassword = () => {
       setShowPassword(!showPassword);
     };
-  
+    useEffect(() => {
+      fetchData();
+      });
     const encodedpassword = encodeURIComponent(password);
   
     async function login() {
@@ -116,6 +118,19 @@ function LoginForm() {
         console.log(error);
       }
     }
+
+    const fetchData = async () => {
+      
+      const response = await fetch(`https://localhost:7131/api/Signup/GetSignupIdByEmail?email=${email}`,{
+       
+      });
+      const jsonData = await response.json();
+      console.log(jsonData);
+      localStorage.setItem("CustomerId",jsonData)
+     
+     
+  
+    };
   
     function validate() {
       try {

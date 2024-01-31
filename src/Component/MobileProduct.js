@@ -18,7 +18,7 @@ function MobileProduct({cart,setCart}) {
    
   useEffect(() => {
       const logged = localStorage.getItem("log");
-      const logged1 = localStorage.getItem("log1");
+      
       setIsLoggedIn(logged === "true"); // Convert the string to boolean
   }, []);
   const addToCart = (productID, name, description, price, imageURL) => {

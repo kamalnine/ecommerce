@@ -1,7 +1,7 @@
 
 import './App.css';
 import LoginForm from './Component/LoginForm';
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import SignupForm from './Component/SignupForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,6 +20,9 @@ import PriceLess69999 from './Component/PriceLess69999';
 import PriceLess89999 from './Component/PriceLess89999';
 import Checkout from './Component/Checkout';
 import AdminProductAdd from './Component/AdminProductAdd';
+import OrderPlaced from './Component/OrderPlaced';
+
+
 function App() {
   const [cart,setCart] = useState([]);
  
@@ -43,7 +46,7 @@ function App() {
         <Route path='/lesssss' element={<PriceLess89999 cart={cart} setCart={setCart}/>}/>
         <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
         <Route path='/addproduct' element={<AdminProductAdd/>}/>
-
+        <Route path='/placed' element={<OrderPlaced/>}/>
 
       </Route>
 
