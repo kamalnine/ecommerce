@@ -108,7 +108,7 @@ const Product = ({ cart, setCart }) => {
                                         padding: '1rem',
                                     }}
                                 >
-                                    <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
+                                    <button className='btn btn-primary mx-3'>{prod.price}&#36;</button>
                                     {/* <button onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)} className='btn btn-warning' style={{float:"right"}}>Add to cart</button> */}
                                 </MDBCardFooter>
                             </MDBCard>

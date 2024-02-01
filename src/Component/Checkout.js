@@ -41,6 +41,33 @@ const Checkout = ({ cart, setCart }) => {
             })
             result = await result.json()
             console.warn("result", result);
+            console.log(result.orderID);
+
+            for (const item of cart) {
+                const orderItem = {
+                    OrderId:result.orderID,
+                    signupId:customerid,
+                    ProductID: item.productID,
+                    ProductName : item.name, // Replace with the correct field from your cart item
+                    Quantity: item.quantity, // Replace with the correct field from your cart item
+                    UnitPrice: item.price, // Replace with the correct field from your cart item
+                    TotalPrice: item.quantity * item.price,
+                    ImageURL : item.imageURL
+                   
+                };
+    
+                let orderItemResult = await fetch("https://localhost:7131/api/OrderItems", {
+                    method: "POST",
+                    body: JSON.stringify(orderItem),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                // Handle the result if needed
+                orderItemResult =await orderItemResult.json();
+                console.log(orderItemResult);
+            }
 
         }
         catch (error) {

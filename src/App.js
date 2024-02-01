@@ -21,6 +21,7 @@ import PriceLess89999 from './Component/PriceLess89999';
 import Checkout from './Component/Checkout';
 import AdminProductAdd from './Component/AdminProductAdd';
 import OrderPlaced from './Component/OrderPlaced';
+import OrderDetails from './Component/OrderDetails';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
         <Route path='/addproduct' element={<AdminProductAdd/>}/>
         <Route path='/placed' element={<OrderPlaced/>}/>
+        <Route path='/details' element={<OrderDetails cart={cart} setCart={setCart}/>}/>
 
       </Route>
 

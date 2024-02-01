@@ -113,7 +113,7 @@ theme="dark"
                        
                     </MDBCardBody>
                     <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
-                            <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
+                            <button className='btn btn-primary mx-3'>{prod.price}&#36;</button>
                             <button className='btn btn-warning' style={{float:"right"}} onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button>
                         </MDBCardFooter>
                 </MDBCard>

@@ -9,6 +9,7 @@ const Cart = ({ cart, setCart }) => {
 
   useEffect(() => {
     setCartItems(cart);
+    console.log(cart);
   }, [cart]);
 
   const removeFromCart = (productID) => {
@@ -47,7 +48,7 @@ const Cart = ({ cart, setCart }) => {
               <Link to={"/"} className='btn btn-warning'>Continue shopping...</Link>
             </div>
           ) :
-            cartItems.map((prod) => (
+           cartItems.map((prod) => (
               <div key={prod.productID} className="card mb-3 my-5" style={{ width: "700px" }}>
                 <div className="row g-0">
                   <div className="col-md-4">
@@ -69,7 +70,7 @@ const Cart = ({ cart, setCart }) => {
                   </div>
                 </div>
               </div>
-            ))
+            )) 
         }
       </div>
       <div className="container text-center my-5" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

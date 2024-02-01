@@ -139,7 +139,7 @@ theme="dark"
       <div className="text-center">
         <h1 className='card-title'>{name}</h1>
         <p className="card-text">{description}</p>
-        <button className='btn btn-primary mx-3'>{price} &#8377;</button>
+        <button className='btn btn-primary mx-3'>{price}&#36;</button>
         <button className="btn btn-warning" onClick={()=>addToCart(id,name,description,price,imageURL)}>Add To Cart</button>
       </div>
     </div>
@@ -164,7 +164,7 @@ theme="dark"
                                
                             </MDBCardBody>
                             <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
-                                    <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
+                                    <button className='btn btn-primary mx-3'>{prod.price}&#36;</button>
                                     <button className='btn btn-warning' onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)} style={{float:"right"}}>Add to cart</button>
                                 </MDBCardFooter>
                         </MDBCard>

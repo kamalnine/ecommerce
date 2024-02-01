@@ -47,10 +47,11 @@ function Header({ cart }) {
                     </form>
                     {isLoggedIn || sol==='Authorized' ? 
                         <div className="user-info">
-                            <span style={{position:"absolute",left:"75vw",fontSize:"20px",top:"15px",fontWeight:"bolder"}}>Welcome {name}</span>
+                            <span style={{position:"absolute",left:"70vw",fontSize:"20px",top:"15px",fontWeight:"bolder"}}>Welcome {name}</span>
+                            <button className="btn btn-light" style={{position:"absolute",left:"82vw"}} onClick={()=>navigate('/details')}>My Orders</button>
                             <Link to={'/cart'} className='cart'>
-                                <button type="button" className="btn btn-primary position-relative">
-                                    <FaCartShopping />
+                                <button type="button" className="btn btn-primary position-relative"style={{position:"absolute",left:"2vw"}}>
+                                    <FaCartShopping/>
                                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         {cart.length}
                                         <span className="visually-hidden">unread messages</span>
@@ -61,18 +62,18 @@ function Header({ cart }) {
                         : ""}
                    
                     {isLoggedIn || sol==='Authorized' ? (
-                       <button type="button" onClick={handleLogout} className="btn btn-warning position-relative">
+                       <button className="btn btn-light" onClick={handleLogout}>
                             Logout
                        </button>
                     ) :
                     <>
                         <Link to={'/login'} className="login">
-                            <button type="button" className="btn btn-warning position-relative" style={{position:"absolute",right:"-20px"}}>
+                            <button type="button" className="btn btn-light position-relative" style={{position:"absolute",right:"-20px"}}>
                                 Login
                             </button>
                         </Link>
                         <Link to={'/signup'} className="signup">
-                            <button type="button" className="btn btn-warning position-relative"style={{position:"absolute",right:"10px"}}>
+                            <button type="button" className="btn btn-light position-relative"style={{position:"absolute",right:"10px"}}>
                                 Signup
                             </button>
                         </Link>
