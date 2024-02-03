@@ -24,14 +24,15 @@ function ProductDetails({cart,setCart}) {
     const[relatedProduct,setRelatedProduct] = useState([]);
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-   
+   const t = localStorage.getItem("r");
+   const u= localStorage.getItem("resultGoogle");
     useEffect(() => {
         const logged = localStorage.getItem("log");
        
         setIsLoggedIn(logged === "true"); // Convert the string to boolean
     }, []);
     const addToCart = (productID, name, description, price, imageURL) => {
-      if (isLoggedIn) {
+      if (t==="Authorized" || u==="Authorized") {
       const obj = {
           productID, name, description, price, imageURL
       }

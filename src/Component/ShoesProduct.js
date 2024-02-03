@@ -7,19 +7,17 @@ import {
     MDBCardHeader,
     MDBCardFooter,
   } from 'mdb-react-ui-kit';
-  import { useNavigate } from 'react-router';
-  import { IoIosArrowBack } from "react-icons/io";
-  import { ToastContainer,toast } from 'react-toastify';
-
-function ClothesProduct({cart,setCart}) {
+import { useNavigate } from 'react-router';
+import { IoIosArrowBack } from "react-icons/io";
+import {ToastContainer,toast} from 'react-toastify';
+function ShoesProduct({cart,setCart}) {
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const t = localStorage.getItem("r");
-   
     useEffect(() => {
         const logged = localStorage.getItem("log");
-       
+        
         setIsLoggedIn(logged === "true"); // Convert the string to boolean
     }, []);
     const addToCart = (productID, name, description, price, imageURL) => {
@@ -61,7 +59,7 @@ function ClothesProduct({cart,setCart}) {
 
   function fetchProductByCategory() {
     try {
-      fetch('https://localhost:7131/api/Product/GetProductByCategory?category=clothes',{
+      fetch('https://localhost:7131/api/Product/GetProductByCategory?category=Shoes',{
         // headers:{
         //   'Authorization': `Bearer ${token}`,
         //   'Content-Type': 'application/json'
@@ -81,8 +79,8 @@ function ClothesProduct({cart,setCart}) {
     }
   }
   return (
-    <div className='container my-5'>
-       <ToastContainer
+   <>
+    <ToastContainer
 position="top-right"
 autoClose={2000}
 hideProgressBar={false}
@@ -95,14 +93,16 @@ pauseOnHover
 theme="dark"
 
 />
-      <IoIosArrowBack onClick={()=>navigate('/')}style={{fontSize:"20px",position:"absolute",top:"8vh",left:"0.1vw"}}/>
+    <IoIosArrowBack onClick={()=>navigate('/')} style={{fontSize:"20px",position:"absolute",top:"8vh",left:"0.1vw"}}/>
+    <div className='container my-5'>
+     
             <div className="row" style={{ padding: "10px",position:"absolute",left:"2vw" }}>
                 {product.map((prod) => (
                     <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>
-                        <MDBCard  onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '65%' }}>
+                        <MDBCard style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '75%' }}>
                             <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} >
                                
-                                <img src={prod.imageURL} className="card-img-top" alt="..."onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} />
+                                <img src={prod.imageURL} className="card-img-top" alt="..." style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)}/>
                                 
                             </MDBCardHeader>
                             <MDBCardBody style={{ padding: "1rem",maxHeight:"150px" }}>
@@ -113,15 +113,16 @@ theme="dark"
                                
                             </MDBCardBody>
                             <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
-                                    <button className='btn btn-primary mx-3'>{prod.price}&#36;</button>
-                                    <button className='btn btn-warning' style={{float:"right"}}onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button>
+                                    <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
+                                    <button className='btn btn-warning' style={{float:"right"}} onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button>
                                 </MDBCardFooter>
                         </MDBCard>
                     </div>
                 ))}
             </div>
         </div>
+   </>
   )
 }
 
-export default ClothesProduct
+export default ShoesProduct

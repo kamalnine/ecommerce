@@ -99,10 +99,10 @@ theme="dark"
     <div className="row" style={{ padding: "10px",position:"absolute",left:"2vw" }}>
         {product.map((prod) => (
             <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>
-                <MDBCard style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '65%' }}>
+                <MDBCard  onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '65%' }}>
                     <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} >
                        
-                        <img src={prod.imageURL} className="card-img-top" alt="..." style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)}/>
+                        <img src={prod.imageURL} className="card-img-top" alt="..." style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}/>
                         
                     </MDBCardHeader>
                     <MDBCardBody style={{ padding: "1rem",maxHeight:"150px" }}>

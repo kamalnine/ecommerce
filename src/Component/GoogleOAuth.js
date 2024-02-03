@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
@@ -10,6 +10,7 @@ import  emailjs  from '@emailjs/browser';
 const GoogleOauthTest = () => {
     const navigate = useNavigate();
     const[logged,setLogged] = useState(false);
+   
 
   
 
@@ -85,6 +86,7 @@ const GoogleOauthTest = () => {
             const response = await axios.post(`https://localhost:7131/api/Login/GetDetails?email=${email}`);
             console.log(response);
             if (response.data === "Authorized") {
+              
               console.log(response.data);
                 localStorage.setItem('resultGoogle', response.data);
                 setLogged(true);
@@ -99,12 +101,31 @@ const GoogleOauthTest = () => {
             console.log(response1.data.token);
             localStorage.setItem("Token",response1.data.token);
             localStorage.setItem("role1",response1.data.role);
-          
+
+           fetchData();
     };
 
   
     const handleFailure = (error) => {
         console.error('Authentication failed:', error);
+    };
+    const fetchData = async () => {
+      try{
+        const email = localStorage.getItem("email");
+      const response = await fetch(`https://localhost:7131/api/Signup/GetSignupIdByEmail?email=${email}`,{
+       
+      });
+      const jsonData = await response.json();
+      console.log(jsonData);
+      localStorage.setItem("CustomerId",jsonData)
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
+     
+     
+  
     };
 
     return (

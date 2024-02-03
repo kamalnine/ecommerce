@@ -14,6 +14,7 @@ function TabletProduct({cart,setCart}) {
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const t = localStorage.getItem("r");
    
     useEffect(() => {
         const logged = localStorage.getItem("log");
@@ -21,7 +22,7 @@ function TabletProduct({cart,setCart}) {
         setIsLoggedIn(logged === "true"); // Convert the string to boolean
     }, []);
     const addToCart = (productID, name, description, price, imageURL) => {
-      if (isLoggedIn) {
+      if (t==="Authorized") {
       const obj = {
           productID, name, description, price, imageURL
       }

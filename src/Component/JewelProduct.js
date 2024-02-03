@@ -11,7 +11,7 @@ import {
   import { IoIosArrowBack } from "react-icons/io";
   import { ToastContainer,toast } from 'react-toastify';
 
-function ClothesProduct({cart,setCart}) {
+function JewelProduct({cart,setCart}) {
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,7 +61,7 @@ function ClothesProduct({cart,setCart}) {
 
   function fetchProductByCategory() {
     try {
-      fetch('https://localhost:7131/api/Product/GetProductByCategory?category=clothes',{
+      fetch('https://localhost:7131/api/Product/GetProductByCategory?category=gold',{
         // headers:{
         //   'Authorization': `Bearer ${token}`,
         //   'Content-Type': 'application/json'
@@ -124,4 +124,4 @@ theme="dark"
   )
 }
 
-export default ClothesProduct
+export default JewelProduct

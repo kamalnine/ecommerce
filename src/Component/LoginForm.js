@@ -81,16 +81,17 @@ function LoginForm() {
           localStorage.setItem('r',"Authorized");
           setisLoggedIn(true);
           navigate('/');
-          setLoggedIn(true);
-          toast.success("Login Sucessfull");
+         toast.sucess("Login Sucessfull!")
+            setLoggedIn(true);
+        
           
          
-          Notify1();
+          
         } else {
           console.log('User not found');
           setisLoggedIn(false);
           setLoggedIn(false);
-          Notify();
+          toast.error('🦄Login UnSucessfull!');
         
         }
       } catch (error) {
@@ -102,7 +103,13 @@ function LoginForm() {
       if (!emailRegex.test(email)) {
         setisLoggedIn(false);
         seterrorMsg('Please Enter a Email Address in Valid format');
+        try{
         toast.error("Please enter an email address in valid format");
+        }
+        catch(error)
+        {
+          console.log(error);
+        }
         return false;
       }
   
@@ -120,13 +127,18 @@ function LoginForm() {
     }
 
     const fetchData = async () => {
-      
+      try{
       const response = await fetch(`https://localhost:7131/api/Signup/GetSignupIdByEmail?email=${email}`,{
        
       });
       const jsonData = await response.json();
       console.log(jsonData);
       localStorage.setItem("CustomerId",jsonData)
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
      
      
   
@@ -146,12 +158,8 @@ function LoginForm() {
       }
     }
   
-    const Notify = () => {
-      toast.error('Login Unsuccessful');
-    };
-    const Notify1 = () => {
-      toast.success('Login Successful');
-    };
+    
+    
   
     const handleBoth = () => {
       login();
@@ -160,19 +168,7 @@ function LoginForm() {
     };
   return (
     <MDBContainer fluid style={{ backgroundColor: '#508bfc', minHeight: '100vh' }}>
-      <ToastContainer
-position="top-right"
-autoClose={2000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"
-
-/>
+       <ToastContainer/>
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
         <MDBCol sm='12' md='6' lg='4'>
           <MDBCard className='bg-white my-5' style={{ borderRadius: '1rem', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>

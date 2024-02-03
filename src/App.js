@@ -13,6 +13,7 @@ import Cart from './Component/Cart';
 import MobileProduct from './Component/MobileProduct';
 import LaptopProduct from './Component/LaptopProduct';
 import TabletProduct from './Component/TabletProduct';
+import PriceFilter from './Component/PriceFilter';
 import ClothesProduct from './Component/ClothesProduct';
 import PriceLess29999 from './Component/PriceLess29999';
 import PriceLess49999 from './Component/PriceLess49999';
@@ -22,6 +23,10 @@ import Checkout from './Component/Checkout';
 import AdminProductAdd from './Component/AdminProductAdd';
 import OrderPlaced from './Component/OrderPlaced';
 import OrderDetails from './Component/OrderDetails';
+import ShoesProduct from './Component/ShoesProduct';
+import JewelProduct from './Component/JewelProduct';
+import BooksProduct from './Component/BooksProduct';
+import HomeApplianceProduct from './Component/HomeAppliance';
 
 
 function App() {
@@ -41,14 +46,20 @@ function App() {
         <Route path='/laptop' element={<LaptopProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/tablet' element={<TabletProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/clothes' element={<ClothesProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/gold' element={<JewelProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/shoes' element={<ShoesProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/homeappliance' element={<HomeApplianceProduct cart={cart} setCart={setCart}/>}/>
+        <Route path='/books' element={<BooksProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/less' element={<PriceLess29999 cart={cart} setCart={setCart}/>}/>
         <Route path='/lesss' element={<PriceLess49999 cart={cart} setCart={setCart}/>}/>
         <Route path='/lessss' element={<PriceLess69999 cart={cart} setCart={setCart}/>}/>
         <Route path='/lesssss' element={<PriceLess89999 cart={cart} setCart={setCart}/>}/>
         <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
+        <Route path='/filter' element={<PriceFilter/>}/>
         <Route path='/addproduct' element={<AdminProductAdd/>}/>
         <Route path='/placed' element={<OrderPlaced/>}/>
         <Route path='/details' element={<OrderDetails cart={cart} setCart={setCart}/>}/>
+
 
       </Route>
 

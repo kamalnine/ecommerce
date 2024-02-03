@@ -61,7 +61,7 @@ const Product = ({ cart, setCart }) => {
                 <div className='row my-3' style={{ padding: '10px'}}>
                     {product.map((prod) => (
                         <div key={prod.productID} className='col-md-4 mb-8'style={{marginBottom:"70px"}}>
-                            <MDBCard
+                            <MDBCard onClick={() => navigate(`/productDetails?data1=${JSON.stringify(prod)}`)}
                                 style={{
                                     border: '1px solid #ddd',
                                     boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
@@ -69,8 +69,6 @@ const Product = ({ cart, setCart }) => {
                                     height: '100%',
                                     width: '65%',
                                     marginLeft:"100px",
-                                    
-                                
                                 }}
                             >
                                 <MDBCardHeader
@@ -79,7 +77,6 @@ const Product = ({ cart, setCart }) => {
                                         maxHeight: '300px',
                                         cursor: 'pointer',
                                     }}
-                                    onClick={() => navigate(`/productDetails?data1=${JSON.stringify(prod)}`)}
                                 >
                                     <img
                                         src={prod.imageURL}
@@ -87,7 +84,7 @@ const Product = ({ cart, setCart }) => {
                                         alt='...'
                                         style={{
                                             width: '100%',
-                                            height: '100%',
+                                            height: '300px', // Fixed height for all images
                                             objectFit: 'cover',
                                             borderTopLeftRadius: '4px',
                                             borderTopRightRadius: '4px',
@@ -109,7 +106,6 @@ const Product = ({ cart, setCart }) => {
                                     }}
                                 >
                                     <button className='btn btn-primary mx-3'>{prod.price}&#36;</button>
-                                    {/* <button onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)} className='btn btn-warning' style={{float:"right"}}>Add to cart</button> */}
                                 </MDBCardFooter>
                             </MDBCard>
                         </div>

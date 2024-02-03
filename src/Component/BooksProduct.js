@@ -11,11 +11,10 @@ import {
   import { IoIosArrowBack } from "react-icons/io";
   import { ToastContainer,toast } from 'react-toastify';
 
-function ClothesProduct({cart,setCart}) {
+function BooksProduct({cart,setCart}) {
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const t = localStorage.getItem("r");
    
     useEffect(() => {
         const logged = localStorage.getItem("log");
@@ -23,7 +22,7 @@ function ClothesProduct({cart,setCart}) {
         setIsLoggedIn(logged === "true"); // Convert the string to boolean
     }, []);
     const addToCart = (productID, name, description, price, imageURL) => {
-      if (t==="Authorized") {
+      if (isLoggedIn) {
       const obj = {
           productID, name, description, price, imageURL
       }
@@ -61,7 +60,7 @@ function ClothesProduct({cart,setCart}) {
 
   function fetchProductByCategory() {
     try {
-      fetch('https://localhost:7131/api/Product/GetProductByCategory?category=clothes',{
+      fetch('https://localhost:7131/api/Product/GetProductByCategory?category=books',{
         // headers:{
         //   'Authorization': `Bearer ${token}`,
         //   'Content-Type': 'application/json'
@@ -99,7 +98,7 @@ theme="dark"
             <div className="row" style={{ padding: "10px",position:"absolute",left:"2vw" }}>
                 {product.map((prod) => (
                     <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>
-                        <MDBCard  onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '65%' }}>
+                        <MDBCard  onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '195%' }}>
                             <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} >
                                
                                 <img src={prod.imageURL} className="card-img-top" alt="..."onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} />
@@ -124,4 +123,4 @@ theme="dark"
   )
 }
 
-export default ClothesProduct
+export default BooksProduct
