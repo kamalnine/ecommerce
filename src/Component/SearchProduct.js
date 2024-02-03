@@ -76,8 +76,8 @@ theme="dark"
         {searchProduct
         .map((prod) => (
             <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>
-                <MDBCard style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '100%' }}>
-                    <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)}>
+                <MDBCard onClick={()=>navigate(`/productDetails?data1=${JSON.stringify(prod)}`)} style={{ border: "1px solid #ddd", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", borderRadius: "4px", height: '100%', width: '100%' }}>
+                    <MDBCardHeader style={{ padding: '0', maxHeight: '300px' }} >
                        
                         <img src={prod.imageURL} className="card-img-top" alt="..." style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }} />
                         
@@ -91,7 +91,7 @@ theme="dark"
                     </MDBCardBody>
                     <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
                             <button className='btn btn-primary mx-3'>{prod.price} &#8377;</button>
-                            <button className='btn btn-warning' style={{float:"right"}} onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button>
+                            {/* <button className='btn btn-warning' style={{float:"right"}} onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button> */}
                         </MDBCardFooter>
                 </MDBCard>
             </div>

@@ -15,6 +15,8 @@ function BooksProduct({cart,setCart}) {
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const u= localStorage.getItem("resultGoogle");
+    const t = localStorage.getItem("r");
    
     useEffect(() => {
         const logged = localStorage.getItem("log");
@@ -22,7 +24,7 @@ function BooksProduct({cart,setCart}) {
         setIsLoggedIn(logged === "true"); // Convert the string to boolean
     }, []);
     const addToCart = (productID, name, description, price, imageURL) => {
-      if (isLoggedIn) {
+      if (u==="Authorized" || t==="Authorized") {
       const obj = {
           productID, name, description, price, imageURL
       }
@@ -113,7 +115,7 @@ theme="dark"
                             </MDBCardBody>
                             <MDBCardFooter style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
                                     <button className='btn btn-primary mx-3'>{prod.price}&#36;</button>
-                                    <button className='btn btn-warning' style={{float:"right"}}onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button>
+                                    {/* <button className='btn btn-warning' style={{float:"right"}}onClick={()=>addToCart(prod.productID,prod.name,prod.description,prod.price,prod.imageURL)}>Add to cart</button> */}
                                 </MDBCardFooter>
                         </MDBCard>
                     </div>
