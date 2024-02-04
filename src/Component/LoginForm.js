@@ -81,7 +81,7 @@ function LoginForm() {
           localStorage.setItem('r',"Authorized");
           setisLoggedIn(true);
           navigate('/');
-         toast.sucess("Login Sucessfull!")
+         toast.success("Login Sucessfull!")
             setLoggedIn(true);
         
           
@@ -221,7 +221,7 @@ function LoginForm() {
                 </p>
               )}
               <p className='text-center mt-4'>
-                New User? <a href='/'>Create Account</a>
+                New User? <a href='/signup'>Create Account</a>
               </p>
               <ToastContainer />
             </MDBCardBody>

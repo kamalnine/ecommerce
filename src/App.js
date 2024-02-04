@@ -27,18 +27,22 @@ import ShoesProduct from './Component/ShoesProduct';
 import JewelProduct from './Component/JewelProduct';
 import BooksProduct from './Component/BooksProduct';
 import HomeApplianceProduct from './Component/HomeAppliance';
+import AdminGetProduct from './Component/AdminGetProduct';
+import AdminUpdateProduct from './Component/AdminUpdateProduct';
+import AdminGetOrder from './Component/AdminGetOrder';
 
 
 function App() {
   const [cart,setCart] = useState([]);
- 
+ const role= localStorage.getItem("role");
   return <BrowserRouter>
 
     <Routes>
       <Route path='/signup' element={<SignupForm />} />
       <Route path='/login' element={<LoginForm />} />
+      
       <Route path='/' element={<MainHeader cart={cart} />}>
-        <Route index element={<Product cart={cart} setCart={setCart} />} />
+       {role==="Admin" ?<Route index element={<AdminGetProduct/>}/>:<Route index element={<Product cart={cart} setCart={setCart} />} />}
         <Route path='/productDetails' element={<ProductDetails cart={cart} setCart={setCart} />} />
         <Route path='/search/:term' element={<SearchProduct cart={cart} setCart={setCart}/>} />
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
@@ -57,6 +61,9 @@ function App() {
         <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
         <Route path='/filter' element={<PriceFilter/>}/>
         <Route path='/addproduct' element={<AdminProductAdd/>}/>
+        
+        <Route path='/update' element={<AdminUpdateProduct/>}/>
+        <Route path="/admingetorder" element={<AdminGetOrder/>}/>
         <Route path='/placed' element={<OrderPlaced/>}/>
         <Route path='/details' element={<OrderDetails cart={cart} setCart={setCart}/>}/>
 
