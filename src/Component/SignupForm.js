@@ -27,6 +27,7 @@ function SignupForm() {
     const [confirmpassword, setconfirmpassword] = useState('');
     const [emailExist, setEmailExist] = useState(false);
     const [check, setcheck] = useState(false);
+  
     const [errorMsg, seterrorMsg] = useState('');
     const [errorMsg1, seterrorMsg1] = useState('');
     const [errorMsg2, seterrorMsg2] = useState('');

@@ -5,6 +5,7 @@ import { FaCartShopping, FaFilter } from 'react-icons/fa6';
 import { NavDropdown } from 'react-bootstrap';
 import { FaSearch } from "react-icons/fa";
 
+
 function Header({ cart }) {
     const [isFilterVisible, setIsFilterVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -15,6 +16,7 @@ function Header({ cart }) {
     const name = localStorage.getItem('name');
     const t = localStorage.getItem('r');
     const role = localStorage.getItem("role");
+    const role1= localStorage.getItem("role1")
 
 
     useEffect(() => {
@@ -43,9 +45,10 @@ function Header({ cart }) {
 
     return (
         <>
-       {role==="Customer" ? ( <header className="sticky-top bg-light">
+       {role==="Customer" || role1==="Customer" ? ( <header className="sticky-top bg-light">
             <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#0F1111", color: "white" }}>
                 <div className="container-fluid">
+               
                     <Link to={'/'} className="navbar-brand text-light">ShopSphere</Link>
                     <button
                         className="navbar-toggler"
@@ -167,26 +170,7 @@ function Header({ cart }) {
                                 Home & Kitchen
                             </NavLink>
                         </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/less" className="nav-link text-light">
-                                {'>'}=200$
-                            </NavLink>
-                        </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/lesss" className="nav-link text-light">
-                                {'>'}=400$
-                            </NavLink>
-                        </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/lessss" className="nav-link text-light">
-                                {'>'}=800$
-                            </NavLink>
-                        </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/lesssss" className="nav-link text-light">
-                                {'>'}=1600$
-                            </NavLink>
-                        </li>
+                       
                     </ul>
                 </div>
             )}
@@ -206,6 +190,7 @@ function Header({ cart }) {
                     >
                         <span className="navbar-toggler-icon" style={{ color: "white" }}></span>
                     </button>
+                   {t === "Authorized" || sol === "Authorized"? <button className='btn btn-light' onClick={()=>navigate('/AdminUser')}>User Details</button>:""}
                     <div className="collapse navbar-collapse justify-content-between" id="navbarNav" >
                         <form className="d-flex mx-auto my-2 my-lg-0" onSubmit={handleSubmit} style={{ height: "35px" }}>
                             <input
@@ -327,26 +312,7 @@ function Header({ cart }) {
                                 Home & Kitchen
                             </NavLink>
                         </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/less" className="nav-link text-light">
-                                {'>'}=200$
-                            </NavLink>
-                        </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/lesss" className="nav-link text-light">
-                                {'>'}=400$
-                            </NavLink>
-                        </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/lessss" className="nav-link text-light">
-                                {'>'}=800$
-                            </NavLink>
-                        </li>
-                        <li className="nav-item" style={{ color: "white" }}>
-                            <NavLink to="/lesssss" className="nav-link text-light">
-                                {'>'}=1600$
-                            </NavLink>
-                        </li>
+                        
                     </ul>
                 </div>
             )}

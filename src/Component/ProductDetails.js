@@ -20,6 +20,7 @@ function ProductDetails({cart,setCart}) {
     const[description,setDescription] = useState("");
     const[imageURL,setImageURL] = useState("");
     const[price,setPrice] = useState("");
+    const[category,setCategory] = useState("");
     // const[setCategory] = useState("");
     const[relatedProduct,setRelatedProduct] = useState([]);
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ function ProductDetails({cart,setCart}) {
     const addToCart = (productID, name, description, price, imageURL) => {
       if (t==="Authorized" || u==="Authorized") {
       const obj = {
-          productID, name, description, price, imageURL
+          productID, name, description, price, imageURL,category
       }
       setCart([...cart, obj]);
       console.log(cart);
@@ -74,6 +75,7 @@ function ProductDetails({cart,setCart}) {
               setDescription(parsedData.description);
               setImageURL(parsedData.imageURL);
               setPrice(parsedData.price);
+              setCategory(parsedData.category);
               // setCategory(parsedData.category);
   
     

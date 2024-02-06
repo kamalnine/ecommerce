@@ -4,6 +4,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate,Link } from 'react-router-dom';
 import { CLIENT_ID } from '../Config/Config';
+import emailjs from '@emailjs/browser';
 
 
 
@@ -30,6 +31,7 @@ const [country, setCountry] = useState();
     const shipDate = new Date(currentDate);
     shipDate.setDate(currentDate.getDate() + 4);
     const status = "Confirmed";
+
 
     useEffect(() => {
         fetchAddress().then(() => showAddressCard());
@@ -76,7 +78,8 @@ const [country, setCountry] = useState();
             result = await result.json();
             console.warn("result", result);
             console.log(result.orderID);
-
+const variant = localStorage.getItem("Variant");
+const unitprice = localStorage.getItem("unitPrice");
             for (const item of cart) {
                 const orderItem = {
                     OrderId: result.orderID,
@@ -84,9 +87,10 @@ const [country, setCountry] = useState();
                     ProductID: item.productID,
                     ProductName: item.name,
                     Quantity: item.quantity,
-                    UnitPrice: item.price,
-                    TotalPrice: item.quantity * item.price,
-                    ImageURL: item.imageURL
+                    UnitPrice: unitprice,
+                    TotalPrice: item.quantity * unitprice,
+                    ImageURL: item.imageURL,
+                    Variant : variant
                 };
 
                 let orderItemResult = await fetch("https://localhost:7131/api/OrderItems", {
@@ -162,7 +166,7 @@ const [country, setCountry] = useState();
             theme: "dark",
         });
     };
-
+const name = localStorage.getItem("name");
     useEffect(() => {
         if (success) {
             toast.success('🦄 Payment successful!', {
@@ -175,6 +179,27 @@ const [country, setCountry] = useState();
                 progress: undefined,
                 theme: "dark",
             });
+            const serviceId = "service_lr9mb09";
+            const templateId = "template_hjtky3k";
+            const publicKey ="KqXYWVyrbahI8eQ88";
+     
+            const templateParams = {
+                     from_name : "ShopSphere",
+                      to_email : localStorage.getItem("email"),
+                     to_name: localStorage.getItem("name"),
+                     message: `Your Order is Confirmed\n\nCustomer Name: ${name}\nOrder Date: ${orderDate}\nShip Date: ${shipDate}\nStatus: ${status}\nTotal Amount: ${totalAmount}`,
+      
+            };
+      
+        emailjs.send(serviceId,templateId,templateParams,publicKey)
+        .then(() => {
+          
+          toast.success("Email sent Successfully");
+        })
+        .catch((emailError) => {
+          
+          console.error("Error sending email:", emailError);
+        }); 
             console.log('Order successful. Your order id is:', orderID);
             setCart([]);
             setTimeout(() => {
@@ -190,7 +215,7 @@ const [country, setCountry] = useState();
     };
     console.log(selectedAddress);
     return (
-        <PayPalScriptProvider options={{ "client-id": CLIENT_ID }}>
+        <PayPalScriptProvider options={{ "client-id": CLIENT_ID }} style={{marginLeft: "150px"}}>
             <Container className="my-5">
                 <ToastContainer
                     position="top-right"

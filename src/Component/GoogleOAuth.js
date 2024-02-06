@@ -10,6 +10,7 @@ import  emailjs  from '@emailjs/browser';
 const GoogleOauthTest = () => {
     const navigate = useNavigate();
     const[logged,setLogged] = useState(false);
+    
    
 
   
@@ -97,10 +98,13 @@ const GoogleOauthTest = () => {
                 setLogged(false);
             }
            localStorage.setItem("log1",logged);
-            const response1 = await axios.post(`https://localhost:7131/api/Login/GetName?email=${email}&password=${encodedpassword}`);
+            const response1 = await axios.post(`https://localhost:7131/api/Login?email=${email}&password=${encodedpassword}`);
             console.log(response1.data.token);
             localStorage.setItem("Token",response1.data.token);
             localStorage.setItem("role1",response1.data.role);
+           console.log(response1.data.role);
+         
+           
 
            fetchData();
     };
@@ -112,6 +116,7 @@ const GoogleOauthTest = () => {
     const fetchData = async () => {
       try{
         const email = localStorage.getItem("email");
+        console.log(email);
       const response = await fetch(`https://localhost:7131/api/Signup/GetSignupIdByEmail?email=${email}`,{
        
       });
