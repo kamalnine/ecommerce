@@ -72,7 +72,7 @@ pauseOnHover
 theme="dark"
 
 />
-    <div className="row" style={{ padding: "10px" }}>
+    {searchProduct.length === 0 ? <h2>No products Available</h2>: <div className="row" style={{ padding: "10px" }}>
         {searchProduct
         .map((prod) => (
             <div key={prod.productID} className="col-md-4" style={{ marginBottom: "20px" }}>
@@ -96,7 +96,7 @@ theme="dark"
                 </MDBCard>
             </div>
         ))}
-    </div>
+    </div>}
 </div>
   )
 }

@@ -110,6 +110,10 @@ function AdminUpdateProduct({ cart, setCart }) {
             <label htmlFor="productCategory" className="form-label">Category</label>
             <input type="text" className="form-control" id="productCategory" value={category} onChange={(e) => setCategory(e.target.value)} />
           </div>
+          <div className="mb-3">
+            <label htmlFor="productCategory" className="form-label">ImageURL</label>
+            <input type="text" className="form-control" id="productImage" value={imageURL} onChange={(e) => setImageURL(e.target.value)} />
+          </div>
          
          <button type="button" className="btn btn-danger mr-2" onClick={() => deleteProduct(id)}>Delete</button>
          &nbsp;&nbsp;&nbsp;&nbsp;

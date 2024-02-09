@@ -29,12 +29,14 @@ import AdminUpdateProduct from './Component/AdminUpdateProduct';
 import AdminGetOrder from './Component/AdminGetOrder';
 import GoogleOauthTest from './Component/GoogleOAuth';
 import AdminUserProfile from './Component/AdminUserProfile';
+import AuthWrapper from './Component/ProtectedRoute';
+
 
 
 
 function App() {
   const [cart,setCart] = useState([]);
-  // const role = localStorage.getItem("role") || localStorage.getItem("role1");
+  const role1 = localStorage.getItem("role") || localStorage.getItem("role1");
   const [role,setRole] = useState(null);
 
   
@@ -45,9 +47,10 @@ function App() {
     <Routes>
       <Route path='/signup' element={<SignupForm />} />
       <Route path='/login' element={<LoginForm setRole={setRole}/>} />
+    
       <Route path='/' element={<MainHeader cart={cart} />}>
-        <Route path='/google' element={<GoogleOauthTest setRole={setRole}/>}/>
-      <Route index element={role==="Admin"?<AdminGetProduct/>:<Product cart={cart} setCart={setCart} />}></Route>
+       <Route path='/google' element={<GoogleOauthTest setRole={setRole}/>}/>
+      <Route index element={role==="Admin" || role1==="Admin"?<AdminGetProduct/>:<Product cart={cart} setCart={setCart} />}></Route>
         <Route path='/productDetails' element={<ProductDetails cart={cart} setCart={setCart} />} />
         <Route path='/search/:term' element={<SearchProduct cart={cart} setCart={setCart}/>} />
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
@@ -62,17 +65,17 @@ function App() {
        
         <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
         <Route path='/filter' element={<PriceFilter/>}/>
-        <Route path='/addproduct' element={<AdminProductAdd/>}/>
+        <Route path='/addproduct' element={role1==="Admin" ? <AdminProductAdd/> : <h2>You are not authorized to view this page</h2>}/>
         
-        <Route path='/update' element={<AdminUpdateProduct/>}/>
-        <Route path="/admingetorder" element={<AdminGetOrder/>}/>
-        <Route path="/AdminUser" element={<AdminUserProfile/>}/>
+        <Route path='/update' element={role1==="Admin" ? <AdminUpdateProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path="/admingetorder" element={role1==="Admin" ? <AdminGetOrder/> : <h2>You are not authorized to view this page</h2>}/>
+        <Route path="/AdminUser" element={role1 === "Admin" ? <AdminUserProfile/> : <h2>You are not authorized to view this page</h2>}/>
         <Route path='/placed' element={<OrderPlaced/>}/>
         <Route path='/details' element={<OrderDetails cart={cart} setCart={setCart}/>}/>
+        
 
 
       </Route>
-
 
     </Routes>
 

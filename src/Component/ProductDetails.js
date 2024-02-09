@@ -13,6 +13,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 
 
+
 function ProductDetails({cart,setCart}) {
     const [id,setid]=useState();
     // const[setJsonData]=useState({});

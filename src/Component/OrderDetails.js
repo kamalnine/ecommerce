@@ -8,6 +8,7 @@ function OrderDetails({ cart, setCart }) {
     const [status, setStatus] = useState('');
     const [totalAmount, setTotalAmount] = useState('');
     const [loading, setLoading] = useState(true);
+    const[order,setOrder] = useState([]);
     const [error, setError] = useState(null);
 
     const customerid = localStorage.getItem('CustomerId');
@@ -65,8 +66,12 @@ function OrderDetails({ cart, setCart }) {
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
-                        setOrderDate(data[0].orderDate);
-                        setShipDate(data[0].shipDate);
+                        const currentDate = new Date();
+                        const shipDate = new Date(currentDate+4);
+                        shipDate.setDate(shipDate.getDate() + 4);
+                       setOrderDate(currentDate);
+                        setShipDate(shipDate);
+                        
                         setStatus(data[0].status);
                         setTotalAmount(data[0].totalAmount);
                     }
@@ -86,11 +91,6 @@ function OrderDetails({ cart, setCart }) {
                 method: 'DELETE'
             })
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                fetchOrderById();
-                fetchOrderItemById();
                 toast.success('🦄Order Cancelled Sucessfully!', {
                     position: "top-right",
                     autoClose: 2000,
@@ -102,6 +102,9 @@ function OrderDetails({ cart, setCart }) {
                     theme: "dark",
                    
                     });
+                fetchOrderById();
+                fetchOrderItemById();
+                
               
                 
                 

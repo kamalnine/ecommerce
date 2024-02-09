@@ -74,6 +74,17 @@ const Cart = ({ cart, setCart }) => {
             <option value="9">9</option>
           </select>
         );
+
+        case "Bottle" : 
+        return(
+          <select className='mx-3' value={selectedVariant} onChange={(e) => handleVariantChange(product.productID, e.target.value)}>
+          <option value="default">Select Volume</option>
+          <option value="500">500ML</option>
+          <option value="750ML">700ML</option>
+          <option value="1L">1L</option>
+          <option value="1.5L">1.5L</option>
+        </select>
+        );
       default:
         return null;
     }
@@ -85,6 +96,7 @@ const Cart = ({ cart, setCart }) => {
       [productID]: variant
     }));
   };
+  
 
   const calculateProductPrice = (product) => {
     const selectedVariant = variantSelections[product.productID] || 'default';
@@ -139,6 +151,19 @@ localStorage.setItem("Variant",selectedVariant);
       case "9":
         updatedPrice += 15;
         break;
+        case "500ML":
+          updatedPrice +=0;
+          break;
+        case "750ML":
+          updatedPrice+=10;
+          break;
+        case "1L":
+          updatedPrice+=15;
+          break;
+
+        case "1.5L":
+          updatedPrice+=20;
+          break;
       default:
         updatedPrice += 0;
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaFilter } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardHeader, MDBCardFooter } from 'mdb-react-ui-kit';
-
+import { TextField, Button, Grid } from '@mui/material';
 function PriceFilter() {
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
@@ -12,6 +12,14 @@ function PriceFilter() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (minPrice < 0 || maxPrice < 0) {
+            setError('Prices cannot be negative.');
+            return;
+        }
+        if (maxPrice <= minPrice) {
+            setError('Maximum price must be greater than minimum price.');
+            return;
+        }
 
         try {
             const response = await fetch(`https://localhost:7131/api/Product/GetProductsByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}`);
@@ -31,31 +39,34 @@ function PriceFilter() {
            <br></br>
            <br></br>
             <form onSubmit={handleSubmit}>
-                <div className="row mb-3">
-                    <div className="col-sm-6">
-                        <input
+            <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={6}>
+                        <TextField
+                            fullWidth
                             type="number"
-                            className="form-control"
-                            placeholder="Minimum Price"
+                            label="Minimum Price"
                             value={minPrice}
                             onChange={(e) => setMinPrice(e.target.value)}
                             required
                         />
-                    </div>
-                    <div className="col-sm-6">
-                        <input
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            fullWidth
                             type="number"
-                            className="form-control"
-                            placeholder="Maximum Price"
+                            label="Maximum Price"
                             value={maxPrice}
                             onChange={(e) => setMaxPrice(e.target.value)}
                             required
                         />
-                    </div>
-                </div>
-                <button className="btn btn-primary" type="submit" style={{position:"absolute",right:"45vw"}}>
-                    <FaFilter /> Filter Products
-                </button>
+                    </Grid>
+                    <Grid item xs={16}>
+                        <Button variant="contained" color="primary" type="submit">
+                            <FaFilter /> Filter Products
+                        </Button>
+                    </Grid>
+                </Grid>
+              
                 <br></br>
                 <br></br>
                 <br></br>

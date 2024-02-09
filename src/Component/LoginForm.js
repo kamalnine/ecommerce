@@ -148,22 +148,23 @@ function LoginForm({ setRole }) {
   };
 
   return (
-    <MDBContainer fluid style={{ backgroundColor: '#508bfc', minHeight: '100vh' }}>
+    <MDBContainer fluid style={{  backgroundImage: `url("https://thumbs.dreamstime.com/b/ecommerce-icon-special-blue-banner-background-ecommerce-icon-isolated-special-blue-banner-background-abstract-illustration-123108022.jpg")`,backgroundSize:"cover", minHeight: '100vh' }}>
       <ToastContainer />
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
         <MDBCol sm='12' md='6' lg='4'>
           
-          <MDBCard className='bg-white my-5' style={{ borderRadius: '1rem', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+          <MDBCard className='bg-white my-5' style={{ borderRadius: '1rem', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',backgroundImage:`url("https://thumbs.dreamstime.com/b/ecommerce-icon-special-blue-banner-background-ecommerce-icon-isolated-special-blue-banner-background-abstract-illustration-123108022.jpg")`,backgroundSize:"cover" }}>
             <MDBCardBody className='p-5'>
-              <h2 className='fw-bold mb-4 text-center'>Login</h2>
-              <p className='text-white-50 mb-4 text-center'>Please enter your login and password!</p>
-              <h5>Email Address</h5>
-              <MDBInput wrapperClass='mb-4' value={email} onChange={(e) => setEmail(e.target.value)} type='email' size='lg' />
+              <h2 className='fw-bold mb-4 text-center' style={{color:"white"}}>Login</h2>
+              <p className='text-white-50 mb-4 text-center fw-bold'style={{color:"white"}} >Please enter your login and password!</p>
+              <h5 style={{color:"white"}}>Email Address</h5>
+              <MDBInput wrapperClass='mb-4' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} type='email' size='lg' />
               {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : ''}
-              <h5>Password</h5>
+              <h5 style={{color:"white"}}>Password</h5>
               <div style={{ position: 'relative' }}>
                 <MDBInput
                   wrapperClass='mb-4'
+                  placeholder='Password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   type={showPassword ? 'text' : 'password'}
@@ -201,16 +202,16 @@ function LoginForm({ setRole }) {
                   Email or Password is Incorrect
                 </p>
               )}
-              <p className='text-center mt-4'>
-                New User? <a href='/signup'>Create Account</a>
+              <p className='text-center mt-4' style={{color:"white"}}>
+                New User? <a href='/signup' style={{color:"white"}}>Create Account</a>
               </p>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
       </MDBRow>
-      <footer style={{ backgroundColor: '#508bfc', color: 'white', padding: '20px', position: 'absolute', bottom: '0', width: '100%', textAlign: 'center' }}>
+      {/* <footer style={{color: 'white', padding: '20px', position: 'absolute', bottom: '0', width: '100%', textAlign: 'center' }}>
         &copy; {new Date().getFullYear()} Shopshere. All rights reserved.
-      </footer>
+      </footer> */}
     </MDBContainer>
   );
 }
