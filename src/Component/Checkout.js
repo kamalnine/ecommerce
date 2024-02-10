@@ -185,7 +185,7 @@ const name = localStorage.getItem("name");
                 from_name: "ShopSphere",
                 to_email: localStorage.getItem("email"),
                 to_name: localStorage.getItem("name"),
-                message: `Your Order is Confirmed \n\n order id:- ${orderID} \n\n Customer Name: ${name}\n\nOrder Date: ${orderDate}\n\nShip Date: ${shipDate}\n\nStatus: ${status}\n\nTotal Amount: ${totalAmount}\n\n ${selectedAddressDetails}`,
+                message: `Your Order is Confirmed \n\n order id:- ${orderID} \n\n Customer Name: ${name}\n\nOrder Date: ${orderDate}\n\nShip Date: ${shipDate}\n\nStatus: ${status}\n\nTotal Amount: ${totalAmount}$\n\n ${selectedAddressDetails}`,
 
             };
 

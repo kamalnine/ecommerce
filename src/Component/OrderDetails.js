@@ -3,13 +3,18 @@ import { ToastContainer,toast } from 'react-toastify';
 
 function OrderDetails({ cart, setCart }) {
     const [orderItem, setOrderItem] = useState([]);
-    const [orderDate, setOrderDate] = useState('');
-    const [shipDate, setShipDate] = useState('');
+    const [orderDate1, setOrderDate] = useState('');
+    const [shipDate1, setShipDate] = useState('');
     const [status, setStatus] = useState('');
     const [totalAmount, setTotalAmount] = useState('');
     const [loading, setLoading] = useState(true);
     const[order,setOrder] = useState([]);
     const [error, setError] = useState(null);
+    const currentDate = new Date();
+    const orderDate = new Date(currentDate);
+    orderDate.setDate(currentDate.getDate() + 0);
+    const shipDate = new Date(currentDate);
+    shipDate.setDate(currentDate.getDate() + 4);
 
     const customerid = localStorage.getItem('CustomerId');
 
@@ -66,9 +71,7 @@ function OrderDetails({ cart, setCart }) {
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
-                        const currentDate = new Date();
-                        const shipDate = new Date(currentDate+4);
-                        shipDate.setDate(shipDate.getDate() + 4);
+                       
                        setOrderDate(currentDate);
                         setShipDate(shipDate);
                         
@@ -154,8 +157,8 @@ theme="dark"
                                     <p className="card-text">Unit Price : {prod.unitPrice}</p>
                                     <p className="card-text">Quantity : {prod.quantity}</p>
                                     <p className="card-text">Variant : {prod.variant}</p>
-                                    <p className="card-text">Ordered On : {formatDate(orderDate)}</p>
-                                    <p className="card-text">Delivery Expected : {formatDate(shipDate)}</p>
+                                    <p className="card-text">Ordered On : {formatDate(orderDate1)}</p>
+                                    <p className="card-text">Delivery Expected : {formatDate(shipDate1)}</p>
                                     <p className="card-text">Status: {status}</p>
                                     <button className="btn btn-primary mx-3">
                                         Total Price : {prod.totalPrice}&#36;

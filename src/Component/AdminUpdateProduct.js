@@ -87,7 +87,7 @@ function AdminUpdateProduct({ cart, setCart }) {
         theme="dark"
       />
       <div className="container">
-        <IoIosArrowBack onClick={() => navigate('/')} style={{ position: 'absolute', top: '67px', left: '20px', fontSize: '24px', color: 'grey', cursor: 'pointer' }} />
+        <IoIosArrowBack onClick={() => navigate(-1)} style={{ position: 'absolute', top: '67px', left: '20px', fontSize: '24px', color: 'grey', cursor: 'pointer' }} />
         <h1>You're Viewing the Product <b>{jsonData.name}</b> details.</h1>
         <form>
           <div className="mb-3">

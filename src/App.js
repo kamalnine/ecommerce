@@ -30,6 +30,14 @@ import AdminGetOrder from './Component/AdminGetOrder';
 import GoogleOauthTest from './Component/GoogleOAuth';
 import AdminUserProfile from './Component/AdminUserProfile';
 import AuthWrapper from './Component/ProtectedRoute';
+import AdminMobileProduct from './Component/AdminMobileProduct';
+import AdminLaptopProduct from './Component/AdminLaptopProduct';
+import AdminTabletProduct from './Component/AdminTabletProduct';
+import AdminShoesProduct from './Component/AdminShoesProduct';
+import AdminJewelleryProduct from './Component/AdminJewelleryProduct';
+import AdminClothesProduct from './Component/AdminClothesProduct';
+import AdminBooksProduct from './Component/AdminBooksProduct';
+import AdminHomeApplianceProduct from './Component/AdminHomeAppliance';
 
 
 
@@ -72,6 +80,14 @@ function App() {
         <Route path="/AdminUser" element={role1 === "Admin" ? <AdminUserProfile/> : <h2>You are not authorized to view this page</h2>}/>
         <Route path='/placed' element={<OrderPlaced/>}/>
         <Route path='/details' element={<OrderDetails cart={cart} setCart={setCart}/>}/>
+        <Route path='/adminMobile' element={role==="Admin" ? <AdminMobileProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path="/adminLaptop" element={role==="Admin" ? <AdminLaptopProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminTablet' element={role==="Admin" ? <AdminTabletProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminShoes' element={role==="Admin" ? <AdminShoesProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminGold' element={role==="Admin" ? <AdminJewelleryProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminClothes' element={role==="Admin" ? <AdminClothesProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminBooks' element={role==="Admin" ? <AdminBooksProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminHomeAppliances' element={role==="Admin" ? <AdminHomeApplianceProduct/>:<h2>You are not authorized to view this page</h2>}/>
         
 
 
