@@ -78,6 +78,26 @@ const Checkout = ({ cart, setCart }) => {
     };
 
     const onSubmitClick = async () => {
+        setShow(true);
+    };
+
+    const createOrder = (data, actions) => {
+        return actions.order.create({
+            purchase_units: [
+                {
+                    amount: {
+                        currency_code: "USD",
+                        value: totalAmount,
+                    },
+                },
+            ],
+        }).then((orderID) => {
+            setOrderID(orderID);
+            return orderID;
+        });
+    };
+
+    const onApprove = async(data, actions) => {
         try {
             console.log({ customerid, orderDate, shipDate, status, totalAmount });
             let item = { customerid, orderDate, shipDate, status, totalAmount };
@@ -122,28 +142,10 @@ const Checkout = ({ cart, setCart }) => {
         } catch (error) {
             console.log(error);
         }
-    };
-
-    const createOrder = (data, actions) => {
-        return actions.order.create({
-            purchase_units: [
-                {
-                    amount: {
-                        currency_code: "USD",
-                        value: totalAmount,
-                    },
-                },
-            ],
-        }).then((orderID) => {
-            setOrderID(orderID);
-            return orderID;
-        });
-    };
-
-    const onApprove = (data, actions) => {
         return actions.order.capture().then(function (details) {
             const { payer } = details;
             setSuccess(true);
+           
         });
     };
 
@@ -292,7 +294,7 @@ const name = localStorage.getItem("name");
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {!showAddressForm && (
     <>
-        <Button variant="primary" type="button" className="me-3" onClick={() => { setShow(true); onSubmitClick(); }}>Place Order</Button>
+        <Button variant="primary" type="button" className="me-3" onClick={() => { onSubmitClick(); }}>Place Order</Button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/cart" className="btn btn-secondary">Back to Cart</Link>
