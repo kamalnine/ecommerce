@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FaCartShopping, FaFilter } from 'react-icons/fa6';
 import { NavDropdown } from 'react-bootstrap';
 import { FaSearch } from "react-icons/fa";
-
+import { RiHeartsLine } from "react-icons/ri";
 
 function Header({ cart }) {
     const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -183,6 +183,11 @@ function Header({ cart }) {
                              Home & Kitchen
                          </NavLink>
                      </li>
+                     {t === "Authorized" || sol === "Authorized" ? <li className="nav-item" style={{ color: "white",position:"absolute",left:"93vw" }}>
+                         <NavLink to="/wishlist" className="nav-link text-light">
+                        <RiHeartsLine style={{fontSize:"30px"}}/>
+                         </NavLink>
+                     </li> : ""}
                      
                  </ul>
              </div>
@@ -315,6 +320,11 @@ function Header({ cart }) {
                       Home & Kitchen
                   </NavLink>
               </li>
+              {t === "Authorized" || sol === "Authorized" ? <li className="nav-item" style={{ color: "white",position:"absolute",left:"93vw" }}>
+                         <NavLink to="/wishlist" className="nav-link text-light">
+                        <RiHeartsLine style={{fontSize:"30px"}}/>
+                         </NavLink>
+                     </li> : ""}
              
           </ul>
       </div>

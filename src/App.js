@@ -38,6 +38,7 @@ import AdminJewelleryProduct from './Component/AdminJewelleryProduct';
 import AdminClothesProduct from './Component/AdminClothesProduct';
 import AdminBooksProduct from './Component/AdminBooksProduct';
 import AdminHomeApplianceProduct from './Component/AdminHomeAppliance';
+import Wishlist from './Component/Wishlist';
 
 
 
@@ -74,7 +75,7 @@ function App() {
         <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
         <Route path='/filter' element={<PriceFilter/>}/>
         <Route path='/addproduct' element={role1==="Admin" ? <AdminProductAdd/> : <h2>You are not authorized to view this page</h2>}/>
-        
+        <Route path='/wishlist' element={<Wishlist/>}/>
         <Route path='/update' element={role1==="Admin" ? <AdminUpdateProduct/>:<h2>You are not authorized to view this page</h2>}/>
         <Route path="/admingetorder" element={role1==="Admin" ? <AdminGetOrder/> : <h2>You are not authorized to view this page</h2>}/>
         <Route path="/AdminUser" element={role1 === "Admin" ? <AdminUserProfile/> : <h2>You are not authorized to view this page</h2>}/>
