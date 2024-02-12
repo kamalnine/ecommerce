@@ -208,6 +208,27 @@ const name = localStorage.getItem("name");
         }
     }, [success]);
 
+    const deleteCartItems = async () => {
+        try {
+            const response = await fetch(`https://localhost:7131/api/Cart/Customer/${customerid}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                console.error('Failed to delete cart items:', response.statusText);
+                return;
+            }
+            setCart([]);
+        } catch (error) {
+            console.error('Error deleting cart items:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (success) {
+            deleteCartItems();
+        }
+    }, [success]);
+
     const handleSelectAddress = (index) => {
         setSelectedAddress(addresses[index]);
       

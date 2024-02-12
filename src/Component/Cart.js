@@ -8,26 +8,93 @@ const Cart = ({ cart, setCart }) => {
   const [variantSelections, setVariantSelections] = useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setCartItems(cart);
-  }, [cart]);
+  
+  const customerid = localStorage.getItem('CustomerId');
 
-  const removeFromCart = (productID) => {
-    const updatedCart = cartItems.filter(item => item.productID !== productID);
-    setCartItems(updatedCart);
-    setCart(updatedCart);
+  const getCartByCustomerId = async () => {
+    try {
+      const response = await fetch(`https://localhost:7131/api/Cart/Customer/${customerid}`);
+      if (!response.ok) {
+        console.error('Failed to fetch cart items:', response.statusText);
+        return [];
+      }
+      const cartItemsData = await response.json();
+      setCartItems(cartItemsData);
+      console.log(cartItemsData)
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+      return [];
+    }
   };
+useEffect(()=>{
+  getCartByCustomerId()
+})
+  // useEffect(() => {
+  //   setCartItems(cart);
+  // }, [cart]);
 
-  const updateQuantity = (productID, quantity) => {
+  const removeFromCart = async (productID) => {
+    try {
+      const response = await fetch(`https://localhost:7131/api/Cart/${productID}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) {
+        console.error('Failed to delete item from cart:', response.statusText);
+        return;
+      }
+      const updatedCart = cartItems.filter(item => item.productID !== productID);
+      setCartItems(updatedCart);
+      setCart(updatedCart);
+    } catch (error) {
+      console.error('Error deleting item from cart:', error);
+    }
+  };
+const removeAllCart = async()=>{
+  try {
+    const response = await fetch(`https://localhost:7131/api/Cart/Customer/${customerid}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) {
+      console.error('Failed to delete item from cart:', response.statusText);
+      return;
+    }
+    setCart([])
+  } catch (error) {
+    console.error('Error deleting item from cart:', error);
+  }
+}
+
+
+const updateQuantity = async (productID, quantity) => {
+  try {
+    const response = await fetch(`https://localhost:7131/api/Cart/UpdateQuantity/${productID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(quantity)
+    });
+
+    if (!response.ok) {
+      console.error('Failed to update quantity:', response.statusText);
+      return;
+    }
+
     const updatedCart = cartItems.map(item => {
       if (item.productID === productID) {
         return { ...item, quantity: quantity };
       }
       return item;
     });
+
     setCartItems(updatedCart);
     setCart(updatedCart);
-  };
+  } catch (error) {
+    console.error('Error updating quantity:', error);
+  }
+};
+
+
 
   const renderVariantOptions = (product) => {
     const { category } = product;
@@ -90,12 +157,36 @@ const Cart = ({ cart, setCart }) => {
     }
   };
 
-  const handleVariantChange = (productID, variant) => {
-    setVariantSelections(prevState => ({
-      ...prevState,
-      [productID]: variant
-    }));
+  const handleVariantChange = async (productID, variant) => {
+    try {
+      // Make a PUT request to the API endpoint with the updated variant
+      const response = await fetch(`https://localhost:7131/api/Cart/UpdateVariant/${productID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(variant)
+      });
+  
+      // Check if the request was successful
+      if (!response.ok) {
+        // Handle error if the request was not successful
+        console.error('Failed to update variant:', response.statusText);
+        return;
+      }
+  
+      // If successful, update the local state with the new variant
+      setVariantSelections(prevState => ({
+        ...prevState,
+        [productID]: variant
+      }));
+     
+    } catch (error) {
+      // Handle any errors that occur during the request
+      console.error('Error updating variant:', error);
+    }
   };
+  
   
 
   const calculateProductPrice = (product) => {
@@ -203,7 +294,8 @@ localStorage.setItem("Variant",selectedVariant);
                     <h5 className="card-title">{prod.name}</h5>
                     <p className="card-text">{prod.description}</p>
                     <button className='btn btn-primary mx-3'>{calculateProductPrice(prod)} &#36;</button>
-                    {renderVariantOptions(prod)}
+                  {renderVariantOptions(prod)}
+                    
                     <select className='mx-3' value={prod.quantity} onChange={(e) => updateQuantity(prod.productID, e.target.value)}>
                       {["quantity", 1, 2, 3, 4, 5].map((quantity) => (
                         <option key={quantity} value={quantity}>{quantity}</option>
@@ -221,7 +313,7 @@ localStorage.setItem("Variant",selectedVariant);
         {cartItems.length === 0 ? "" :
           <div>
             <button className="btn btn-warning mx-3" onClick={() => navigate('/checkout')}>Checkout</button>
-            <button onClick={() => setCart([])} className='btn btn-danger'>Clear Cart</button>
+            <button onClick={()=>removeAllCart(customerid)} className='btn btn-danger'>Clear Cart</button>
             <div className='container text-center my-5'>
               <h1 style={{ fontSize: "bolder" }}> Total Amount: {totalAmount}&#8377;</h1>
             </div>

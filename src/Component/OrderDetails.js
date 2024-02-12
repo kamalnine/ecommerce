@@ -72,7 +72,7 @@ function OrderDetails({ cart, setCart }) {
                 .then((data) => {
                     if (data) {
                        
-                       setOrderDate(currentDate);
+                       setOrderDate(orderDate);
                         setShipDate(shipDate);
                         
                         setStatus(data[0].status);
