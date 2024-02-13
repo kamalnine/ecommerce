@@ -39,6 +39,7 @@ import AdminClothesProduct from './Component/AdminClothesProduct';
 import AdminBooksProduct from './Component/AdminBooksProduct';
 import AdminHomeApplianceProduct from './Component/AdminHomeAppliance';
 import Wishlist from './Component/Wishlist';
+import UserProfile from './Component/userProfile';
 
 
 
@@ -89,7 +90,7 @@ function App() {
         <Route path='/adminClothes' element={role==="Admin" ? <AdminClothesProduct/>:<h2>You are not authorized to view this page</h2>}/>
         <Route path='/adminBooks' element={role==="Admin" ? <AdminBooksProduct/>:<h2>You are not authorized to view this page</h2>}/>
         <Route path='/adminHomeAppliances' element={role==="Admin" ? <AdminHomeApplianceProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        
+        <Route path='/userprofile' element={<UserProfile/>}/>
 
 
       </Route>

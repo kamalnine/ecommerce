@@ -5,6 +5,7 @@ import { FaCartShopping, FaFilter } from 'react-icons/fa6';
 import { NavDropdown } from 'react-bootstrap';
 import { FaSearch } from "react-icons/fa";
 import { RiHeartsLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 
 function Header({ cart }) {
     const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -324,7 +325,12 @@ function Header({ cart }) {
                          <NavLink to="/wishlist" className="nav-link text-light">
                         <RiHeartsLine style={{fontSize:"30px"}}/>
                          </NavLink>
-                     </li> : ""}
+                </li> : ""}
+                {t === "Authorized" || sol === "Authorized" ? <li className="nav-item" style={{ color: "white",position:"absolute",left:"89vw" }}>
+                         <NavLink to="/userprofile" className="nav-link text-light">
+                        <CgProfile style={{fontSize:"30px"}}/>
+                         </NavLink>
+                </li> : ""}
              
           </ul>
       </div>
