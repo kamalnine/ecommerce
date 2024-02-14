@@ -253,7 +253,7 @@ const name = localStorage.getItem("name");
                 />
                 <h1 className="text-center mb-5">Checkout</h1>
                 <div className="text-center">
-                    <h4>Total Amount: {totalAmount}&#8377;</h4>
+                    <h4>Total Amount: {totalAmount}&#36;</h4>
                     <p>Enter your payment and shipping details below:</p>
                 </div>
                 {showAddress ? (

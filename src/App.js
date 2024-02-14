@@ -40,6 +40,7 @@ import AdminBooksProduct from './Component/AdminBooksProduct';
 import AdminHomeApplianceProduct from './Component/AdminHomeAppliance';
 import Wishlist from './Component/Wishlist';
 import UserProfile from './Component/userProfile';
+import UpdatePasswordForm from './Component/ForgetPassword';
 
 
 
@@ -91,6 +92,7 @@ function App() {
         <Route path='/adminBooks' element={role==="Admin" ? <AdminBooksProduct/>:<h2>You are not authorized to view this page</h2>}/>
         <Route path='/adminHomeAppliances' element={role==="Admin" ? <AdminHomeApplianceProduct/>:<h2>You are not authorized to view this page</h2>}/>
         <Route path='/userprofile' element={<UserProfile/>}/>
+        <Route path='/forget' element={<UpdatePasswordForm/>}/>
 
 
       </Route>

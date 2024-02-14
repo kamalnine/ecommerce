@@ -205,6 +205,9 @@ function LoginForm({ setRole }) {
               <p className='text-center mt-4' style={{color:"white"}}>
                 New User? <a href='/signup' style={{color:"white"}}>Create Account</a>
               </p>
+              <p className='text-center mt-4' style={{color:"white"}}>
+                <a href='/forget' style={{color:"white"}}>Forget Password</a>
+              </p>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>

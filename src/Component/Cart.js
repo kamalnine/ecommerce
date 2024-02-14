@@ -315,7 +315,7 @@ localStorage.setItem("Variant",selectedVariant);
             <button className="btn btn-warning mx-3" onClick={() => navigate('/checkout')}>Checkout</button>
             <button onClick={()=>removeAllCart(customerid)} className='btn btn-danger'>Clear Cart</button>
             <div className='container text-center my-5'>
-              <h1 style={{ fontSize: "bolder" }}> Total Amount: {totalAmount}&#8377;</h1>
+              <h1 style={{ fontSize: "bolder" }}> Total Amount: {totalAmount}&#36;</h1>
             </div>
           </div>
         }
