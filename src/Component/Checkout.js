@@ -124,7 +124,9 @@ const Checkout = ({ cart, setCart }) => {
                     UnitPrice: unitprice,
                     TotalPrice: item.quantity * unitprice,
                     ImageURL: item.imageURL,
-                    Variant: variant
+                    Variant: variant,
+                    orderDate : orderDate,
+                    shipDate : shipDate
                 };
 
                 let orderItemResult = await fetch("https://localhost:7131/api/OrderItems", {

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { useReactToPrint } from 'react-to-print';
+
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 import JsBarcode from 'jsbarcode';
 import autoTable from 'jspdf-autotable';
 import { MdOutlineFileDownload } from "react-icons/md";
-import { IoPrint } from "react-icons/io5";
+
 
 
 function OrderDetails({ cart, setCart }) {
@@ -92,6 +92,17 @@ function OrderDetails({ cart, setCart }) {
                 const headerX = (pdfWidth - headerWidth) / 2;
                 pdf.text(headerX, 20, headerText);
     
+
+            
+    
+                // Add "Paid" tag
+                pdf.setFontSize(12);
+                const paidText = "Paid";
+                const paidTextWidth = pdf.getStringUnitWidth(paidText) * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
+                const paidTextX = pdfWidth - paidTextWidth - 10; // Adjust as needed
+                const paidTextY = 20; // Adjust as needed
+                pdf.setTextColor("#28a745"); // Green color
+                pdf.text(paidTextX, paidTextY + 5, paidText);
                 // Add "sold by" message and additional information
                 const sellerInfo = [
                     'Sold by:',
@@ -100,10 +111,13 @@ function OrderDetails({ cart, setCart }) {
                     'GST: 53WE55666DF'
                 ];
                 pdf.setFontSize(10);
+                pdf.setTextColor("black")
                 const sellerInfoMargin = 10;
                 sellerInfo.forEach((line, index) => {
                     pdf.text(sellerInfoMargin, 30 + (index * 10), line);
                 });
+               
+
     
                 // Generate barcode image
                 const barcodeMargin = 180;
@@ -122,7 +136,7 @@ function OrderDetails({ cart, setCart }) {
                 pdf.addImage(barcodeDataURL, 'JPEG', barcodeX, 50, barcodeWidth, barcodeHeight);
     
                 // Add margin before order details table
-                const marginTop = 90; // Adjust as needed
+                const marginTop = 100; // Adjust as needed
     
                 // Add order details table
                 const tableHeaders = ['Product Name', 'Unit Price', 'Quantity', 'Variant', 'Ordered On', 'Delivery Expected', 'Status', 'Total Price'];
@@ -263,11 +277,11 @@ function OrderDetails({ cart, setCart }) {
                                 <div className="col-md-8">
                                     <div className="card-body text-center">
                                         <h5 className="card-title">Product Name : {prod.productName}</h5>
-                                        <p className="card-text">Unit Price : {prod.unitPrice}</p>
+                                        <p className="card-text">Unit Price : {prod.unitPrice}&#36;</p>
                                         <p className="card-text">Quantity : {prod.quantity}</p>
                                         <p className="card-text">Variant : {prod.variant}</p>
-                                        <p className="card-text">Ordered On : {formatDate(orderDate1)}</p>
-                                        <p className="card-text">Delivery Expected : {formatDate(shipDate1)}</p>
+                                        <p className="card-text">Ordered On : {formatDate(prod.orderDate)}</p>
+                                        <p className="card-text">Delivery Expected : {formatDate(prod.shipDate)}</p>
                                         <p className="card-text">Status: {status}</p>
                                         <button className="btn btn-primary mx-3">
                                             Total Price : {prod.totalPrice}&#36;
@@ -280,7 +294,7 @@ function OrderDetails({ cart, setCart }) {
                                             Cancel order
                                         </button>
 
-                                        <div style={{marginLeft:"-800px",marginTop:"-80px" }}>
+                                        <div style={{marginLeft:"370px",marginTop:"-60px" }}>
                
                 <button className="btn btn-dark my-4" onClick={() => downloadPDF(prod.orderItemID)}>
                 <MdOutlineFileDownload />
