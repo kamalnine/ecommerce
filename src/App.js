@@ -64,7 +64,7 @@ function App() {
       <Route index element={role==="Admin" || role1==="Admin"?<AdminGetProduct/>:<Product cart={cart} setCart={setCart} />}></Route>
         <Route path='/productDetails' element={<ProductDetails cart={cart} setCart={setCart} />} />
         <Route path='/search/:term' element={<SearchProduct cart={cart} setCart={setCart}/>} />
-        <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
+        <Route path='/cart' element={role==="Admin" || role1==="Admin" || role==="Customer" || role1==="Customer"?<Cart cart={cart} setCart={setCart}/>: <Product/>} />
         <Route path='/mobile' element={<MobileProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/laptop' element={<LaptopProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/tablet' element={<TabletProduct cart={cart} setCart={setCart}/>}/>
@@ -74,23 +74,23 @@ function App() {
         <Route path='/homeappliance' element={<HomeApplianceProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/books' element={<BooksProduct cart={cart} setCart={setCart}/>}/>
        
-        <Route path='/checkout' element={<Checkout cart={cart} setCart={setCart}/>}/>
+        <Route path='/checkout' element={role==="Admin" || role1==="Admin" || role==="Customer" || role1==="Customer" ? <Checkout cart={cart} setCart={setCart}/>:<Product/>}/>
         <Route path='/filter' element={<PriceFilter/>}/>
         <Route path='/addproduct' element={role1==="Admin" ? <AdminProductAdd/> : <h2>You are not authorized to view this page</h2>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
         <Route path='/update' element={role1==="Admin" ? <AdminUpdateProduct/>:<h2>You are not authorized to view this page</h2>}/>
         <Route path="/admingetorder" element={role1==="Admin" ? <AdminGetOrder/> : <h2>You are not authorized to view this page</h2>}/>
         <Route path="/AdminUser" element={role1 === "Admin" ? <AdminUserProfile/> : <h2>You are not authorized to view this page</h2>}/>
-        <Route path='/placed' element={<OrderPlaced/>}/>
-        <Route path='/details' element={<OrderDetails cart={cart} setCart={setCart}/>}/>
-        <Route path='/adminMobile' element={role==="Admin" ? <AdminMobileProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        <Route path="/adminLaptop" element={role==="Admin" ? <AdminLaptopProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        <Route path='/adminTablet' element={role==="Admin" ? <AdminTabletProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        <Route path='/adminShoes' element={role==="Admin" ? <AdminShoesProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        <Route path='/adminGold' element={role==="Admin" ? <AdminJewelleryProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        <Route path='/adminClothes' element={role==="Admin" ? <AdminClothesProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        <Route path='/adminBooks' element={role==="Admin" ? <AdminBooksProduct/>:<h2>You are not authorized to view this page</h2>}/>
-        <Route path='/adminHomeAppliances' element={role==="Admin" ? <AdminHomeApplianceProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/placed' element={role==="Admin" || role1==="Admin" || role==="Customer" || role1==="Customer"?<OrderPlaced/>:<Product/>}/>
+        <Route path='/details' element={role==="Admin" || role1==="Admin" || role==="Customer" || role1==="Customer"?<OrderDetails cart={cart} setCart={setCart}/>:<Product/>}/>
+        <Route path='/adminMobile' element={role1==="Admin" ? <AdminMobileProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path="/adminLaptop" element={role1==="Admin" ? <AdminLaptopProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminTablet' element={role1==="Admin" ? <AdminTabletProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminShoes' element={role1==="Admin" ? <AdminShoesProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminGold' element={role1==="Admin" ? <AdminJewelleryProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminClothes' element={role1==="Admin" ? <AdminClothesProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminBooks' element={role1==="Admin" ? <AdminBooksProduct/>:<h2>You are not authorized to view this page</h2>}/>
+        <Route path='/adminHomeAppliances' element={role1==="Admin" ? <AdminHomeApplianceProduct/>:<h2>You are not authorized to view this page</h2>}/>
         <Route path='/userprofile' element={<UserProfile/>}/>
         <Route path='/forget' element={<UpdatePasswordForm/>}/>
 

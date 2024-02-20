@@ -28,7 +28,7 @@ const Checkout = ({ cart, setCart }) => {
     orderDate.setDate(currentDate.getDate() + 0);
     const shipDate = new Date(currentDate);
     shipDate.setDate(currentDate.getDate() + 4);
-    const status = "Confirmed";
+    const[status,setStatus] = useState("Confirmed");
 
     useEffect(() => {
         fetchAddress().then(() => showAddressCard());
@@ -128,6 +128,9 @@ const Checkout = ({ cart, setCart }) => {
                     orderDate : orderDate,
                     shipDate : shipDate
                 };
+                if (new Date(orderItem.shipDate) >= new Date()) {
+                     setStatus("Delivered");
+                }
 
                 let orderItemResult = await fetch("https://localhost:7131/api/OrderItems", {
                     method: "POST",
