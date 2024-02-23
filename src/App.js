@@ -41,6 +41,8 @@ import AdminHomeApplianceProduct from './Component/AdminHomeAppliance';
 import Wishlist from './Component/Wishlist';
 import UserProfile from './Component/userProfile';
 import UpdatePasswordForm from './Component/ForgetPassword';
+import Tour from './Component/Tour';
+
 
 
 
@@ -73,7 +75,6 @@ function App() {
         <Route path='/shoes' element={<ShoesProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/homeappliance' element={<HomeApplianceProduct cart={cart} setCart={setCart}/>}/>
         <Route path='/books' element={<BooksProduct cart={cart} setCart={setCart}/>}/>
-       
         <Route path='/checkout' element={role==="Admin" || role1==="Admin" || role==="Customer" || role1==="Customer" ? <Checkout cart={cart} setCart={setCart}/>:<Product/>}/>
         <Route path='/filter' element={<PriceFilter/>}/>
         <Route path='/addproduct' element={role1==="Admin" ? <AdminProductAdd/> : <h2>You are not authorized to view this page</h2>}/>

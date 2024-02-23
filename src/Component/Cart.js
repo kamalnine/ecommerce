@@ -36,7 +36,8 @@ useEffect(()=>{
   const removeFromCart = async (productID) => {
     try {
       const response = await fetch(`https://localhost:7131/api/Cart/${productID}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        mode: 'no-cors',
       });
       if (!response.ok) {
         console.error('Failed to delete item from cart:', response.statusText);
@@ -52,7 +53,8 @@ useEffect(()=>{
 const removeAllCart = async()=>{
   try {
     const response = await fetch(`https://localhost:7131/api/Cart/Customer/${customerid}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      mode: 'no-cors',
     });
     if (!response.ok) {
       console.error('Failed to delete item from cart:', response.statusText);
@@ -69,6 +71,7 @@ const updateQuantity = async (productID, quantity) => {
   try {
     const response = await fetch(`https://localhost:7131/api/Cart/UpdateQuantity/${productID}`, {
       method: 'PUT',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -162,6 +165,7 @@ const updateQuantity = async (productID, quantity) => {
       // Make a PUT request to the API endpoint with the updated variant
       const response = await fetch(`https://localhost:7131/api/Cart/UpdateVariant/${productID}`, {
         method: 'PUT',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },

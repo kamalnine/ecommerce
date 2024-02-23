@@ -42,6 +42,7 @@ const Product = ({ cart, setCart }) => {
             console.log(error);
         }
     };
+    
     const getWishlistByCustomerId = async () => {
         try {
             const customerid = localStorage.getItem('CustomerId');

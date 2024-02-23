@@ -7,6 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import { RiHeartsLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 
+
 function Header({ cart }) {
     const [isFilterVisible, setIsFilterVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -237,6 +238,7 @@ function Header({ cart }) {
               <ul className="navbar-nav">
                   {t === "Authorized" || sol === "Authorized" ? (
                       <>
+                      
                           <li className="nav-item">
                               <span className="navbar-text text-light" style={{ position: "absolute", left: "71vw", top: "1vh", color: "white" }}>
                                   Welcome, {name}!
@@ -321,6 +323,7 @@ function Header({ cart }) {
                       Home & Kitchen
                   </NavLink>
               </li>
+             
               {t === "Authorized" || sol === "Authorized" ? <li className="nav-item" style={{ color: "white",position:"absolute",left:"93vw" }}>
                          <NavLink to="/wishlist" className="nav-link text-light">
                         <RiHeartsLine style={{fontSize:"30px"}}/>
